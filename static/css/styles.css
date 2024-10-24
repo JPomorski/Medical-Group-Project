@@ -1,0 +1,138 @@
+/* Resetowanie marginesów i paddingów */
+body, h2, ul, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ustawienia dla całego ciała dokumentu */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #808080; /* Szare tło */
+    display: flex;
+    flex-direction: column; /* Kolumnowe rozmieszczenie */
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh; /* Wysokość 100% widoku */
+}
+
+/* Stylizacja nagłówka */
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: white; /* Kolor nagłówka */
+}
+
+/* Stylizacja formularza */
+form {
+    background-color: #dcdcdc; /* Jasno szary */
+    padding: 20px; /* Padding wewnętrzny */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
+    width: 100%; /* Szerokość 100% kontenera */
+    max-width: 400px; /* Maksymalna szerokość */
+}
+
+/* Elementy formularza */
+label {
+    display: block; /* Blokowy styl dla etykiet */
+    margin: 10px 0 5px; /* Odstępy */
+}
+
+input[type="text"], select {
+    width: 100%; /* Szerokość 100% */
+    padding-bottom: 5px; /* Padding wewnętrzny */
+    padding-top: 5px; /* Padding wewnętrzny */
+    margin-bottom: 10px; /* Odstęp dolny */
+    border: 1px solid #ccc; /* Obramowanie */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+}
+
+/* Stylizacja przycisku do dodawania pacjenta */
+input[type="submit"] {
+    padding: 10px;
+    background-color: #007BFF; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Bez obramowania */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmieniony kursor na wskaźnik */
+    font-size: 16px; /* Rozmiar czcionki */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Ciemniejszy odcień niebieskiego przy najechaniu */
+}
+
+/* Lista pacjentów */
+ul {
+    list-style-type: none; /* Usunięcie punktów z listy */
+    padding: 0;
+    width: 100%; /* Szerokość 100% */
+    max-width: 500px; /* Maksymalna szerokość listy */
+}
+
+/* Elementy listy */
+li {
+    margin: 10px 0; /* Odstęp pomiędzy elementami listy */
+}
+
+/* Stylizacja kontenera dla przycisku */
+.submit-container {
+    display: flex; /* Umożliwia elastyczne rozmieszczenie */
+    justify-content: center; /* Wyśrodkowanie poziome */
+    margin-top: 20px; /* Odstęp górny */
+}
+
+/* Stylizacja przycisku pacjenta */
+button {
+    width: 100%; /* Szerokość 100% kontenera */
+    padding: 10px;
+    background-color: #4CAF50; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Bez obramowania */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmieniony kursor na wskaźnik */
+    font-size: 16px; /* Rozmiar czcionki */
+}
+
+button:hover {
+    background-color: #45a049; /* Ciemniejszy odcień zielonego przy najechaniu */
+}
+
+/* Stylizacja modalnego okienka */
+.modal {
+    display: none; /* Ukryty domyślnie */
+    position: fixed; /* Pozycjonowanie */
+    z-index: 1; /* Na wierzchu */
+    left: 0;
+    top: 0;
+    width: 100%; /* Szerokość 100% */
+    height: 100%; /* Wysokość 100% */
+    overflow: auto; /* Przewijanie, jeśli potrzebne */
+    background-color: rgba(0, 0, 0, 0.7); /* Półprzezroczysty czarny tło */
+}
+
+/* Stylizacja treści modalnego okienka */
+.modal-content {
+    background-color: #f0f0f0; /* Jasno szary kolor modalnego okienka */
+    margin: 15% auto; /* Marginesy dla centrowania */
+    padding: 20px;
+    border: 1px solid #888; /* Obramowanie */
+    width: 80%; /* Szerokość modalnego okienka */
+    max-width: 400px; /* Maksymalna szerokość */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+}
+
+/* Stylizacja przycisku zamknięcia modala */
+.close {
+    color: #aaa; /* Kolor przycisku zamknięcia */
+    float: right; /* W prawo */
+    font-size: 28px; /* Rozmiar czcionki */
+    font-weight: bold; /* Pogrubienie */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Zmiana koloru przy najechaniu */
+    text-decoration: none; /* Bez podkreślenia */
+    cursor: pointer; /* Zmieniony kursor na wskaźnik */
+}

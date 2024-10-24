@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registration Page</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<h2>Patient Registration Form:</h2>
+<div class="container">
+    <form id="registerForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Name" required>
+
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" name="surname" placeholder="Surname" required>
+
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" placeholder="Age" required>
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="blood_type">Blood Type</label>
+        <select id="blood_type" name="blood_type" required>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select>
+
+        <div class="submit-container">
+            <input type="submit" value="Register">
+        </div>
+    </form>
+
+    <form class="submit-container" action="/all">
+        <input type="submit" value="ALL PATIENTS">
+    </form>
+</div>
+
+<script>
+    // Obsługa formularza rejestracji
+    document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Pobieranie danych z formularza
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const age = document.getElementById('age').value;
+        const gender = document.getElementById('gender').value;
+        const blood_type = document.getElementById('blood_type').value;
+
+        try {
+            // Wysyłanie żądania POST w formacie JSON
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, surname, age, gender, blood_type })
+            });
+
+            // Odbieranie odpowiedzi z serwera
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Patient registered successfully!');
+                // Możesz opcjonalnie zresetować formularz
+                document.getElementById('registerForm').reset();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+</script>
+</body>
+</html>

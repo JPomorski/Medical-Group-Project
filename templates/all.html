@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Patient Forms Page</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<h2>All Patient Forms:</h2>
+
+<ul>
+    {% for patient in patients %}
+        <li>
+            <button onclick="showModal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}')">
+                {{ patient.name }} {{ patient.surname }}
+            </button>
+        </li>
+    {% endfor %}
+</ul>
+
+<form class="submit-container" action="/">
+    <input type="submit" value="ADD PATIENT">
+</form>
+
+<!-- Modalne okienko -->
+<div id="patientModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Patient Details</h2>
+        <p><strong>Name:</strong> <span id="modalName"></span></p>
+        <p><strong>Surname:</strong> <span id="modalSurname"></span></p>
+        <p><strong>Age:</strong> <span id="modalAge"></span></p>
+        <p><strong>Gender:</strong> <span id="modalGender"></span></p>
+        <p><strong>Blood Type:</strong> <span id="modalBloodType"></span></p>
+    </div>
+</div>
+
+<script>
+    // Funkcja do pokazywania modala z danymi pacjenta
+    function showModal(name, surname, age, gender, blood_type) {
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalSurname').innerText = surname;
+        document.getElementById('modalAge').innerText = age;
+        document.getElementById('modalGender').innerText = gender;
+        document.getElementById('modalBloodType').innerText = blood_type;
+
+        // Pokazanie modala
+        document.getElementById('patientModal').style.display = 'block';
+    }
+
+    // Funkcja do zamykania modala
+    function closeModal() {
+        document.getElementById('patientModal').style.display = 'none';
+    }
+
+    // Zamknij modal, jeśli kliknięto poza nim
+    window.onclick = function(event) {
+        const modal = document.getElementById('patientModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

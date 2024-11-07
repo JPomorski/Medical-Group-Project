@@ -14,6 +14,36 @@ body {
     justify-content: flex-start;
     height: 100vh; /* Wysokość 100% widoku */
 }
+.mainSiteBody {
+    background-image: url('/static/images/file-nwEqvro25h3ZbEYFv4RIhsqF.png'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+
+.container2{
+    background-color: #dcdcdc; /* Jasno szary */
+    padding: 20px; /* Padding wewnętrzny */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
+    width: 100%; /* Szerokość 100% kontenera */
+    max-width: 400px; /* Maksymalna szerokość */
+    height: 100%; /* Wysokość 100% widoku */
+    max-height: 400px; /* Maksymalna wysokość */
+    display: flex; 
+    flex-direction: column; /* Ustawia elementy w kolumnie */
+    justify-content: space-around; /* Odsuwa elementy na równa odległość od końca i początku diva oraz od krawędzi */
+}
+.buttonOnMainSite {
+    width: 100%; /* Szerokość 100% kontenera */
+    padding: 10px;
+    background-color: #4CAF50; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Bez obramowania */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmieniony kursor na wskaźnik */
+    font-size: 16px; /* Rozmiar czcionki */
+}
 
 /* Stylizacja nagłówka */
 h2 {

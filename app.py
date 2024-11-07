@@ -43,6 +43,10 @@ class PatientRegistration(Resource):
 # accident form panel
 @app.route('/', methods=['GET', 'POST'])
 def main():  # put application's code here
+    return render_template('main_site.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():  # put application's code here
     if request.method == 'POST':
         return PatientRegistration().post()
     return render_template('register.html')

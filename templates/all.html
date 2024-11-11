@@ -13,51 +13,51 @@
 <ul>
     {% for patient in patients %}
         <li>
-            <button onclick="showModal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}')">
+            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}')">
                 {{ patient.name }} {{ patient.surname }}
             </button>
         </li>
     {% endfor %}
 </ul>
 
-<form class="submit-container" action="register">
+<form class="submit_container" action="register">
     <input type="submit" value="ADD PATIENT">
 </form>
 
 <!-- Modalne okienko -->
-<div id="patientModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+<div id="patient_modal" class="modal">
+    <div class="modal_content">
+        <span class="close" onclick="close_modal()">&times;</span>
         <h2>Patient Details</h2>
-        <p><strong>Name:</strong> <span id="modalName"></span></p>
-        <p><strong>Surname:</strong> <span id="modalSurname"></span></p>
-        <p><strong>Age:</strong> <span id="modalAge"></span></p>
-        <p><strong>Gender:</strong> <span id="modalGender"></span></p>
-        <p><strong>Blood Type:</strong> <span id="modalBloodType"></span></p>
+        <p><strong>Name:</strong> <span id="modal_name"></span></p>
+        <p><strong>Surname:</strong> <span id="modal_surname"></span></p>
+        <p><strong>Age:</strong> <span id="modal_age"></span></p>
+        <p><strong>Gender:</strong> <span id="modal_gender"></span></p>
+        <p><strong>Blood Type:</strong> <span id="modal_blood_type"></span></p>
     </div>
 </div>
 
 <script>
     // Funkcja do pokazywania modala z danymi pacjenta
-    function showModal(name, surname, age, gender, blood_type) {
-        document.getElementById('modalName').innerText = name;
-        document.getElementById('modalSurname').innerText = surname;
-        document.getElementById('modalAge').innerText = age;
-        document.getElementById('modalGender').innerText = gender;
-        document.getElementById('modalBloodType').innerText = blood_type;
+    function show_modal(name, surname, age, gender, blood_type) {
+        document.getElementById('modal_name').innerText = name;
+        document.getElementById('modal_surname').innerText = surname;
+        document.getElementById('modal_age').innerText = age;
+        document.getElementById('modal_gender').innerText = gender;
+        document.getElementById('modal_blood_type').innerText = blood_type;
 
         // Pokazanie modala
-        document.getElementById('patientModal').style.display = 'block';
+        document.getElementById('patient_modal').style.display = 'block';
     }
 
     // Funkcja do zamykania modala
-    function closeModal() {
-        document.getElementById('patientModal').style.display = 'none';
+    function close_modal() {
+        document.getElementById('patient_modal').style.display = 'none';
     }
 
     // Zamknij modal, jeśli kliknięto poza nim
     window.onclick = function(event) {
-        const modal = document.getElementById('patientModal');
+        const modal = document.getElementById('patient_modal');
         if (event.target === modal) {
             modal.style.display = 'none';
         }

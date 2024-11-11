@@ -11,38 +11,40 @@
 
 
 
-<body class="mainSiteBody">
+<body class="body_main">
     <header>
-        <div class="headerContainer">
-            <div class="headerContainer2">
-                <img src="/static/images/logo.png" alt="Logo" class="logo">
-                <p class="headerShortcutName"> FRMS </p>
+        <div class="header_container_main">
+            <div class="header_container_main_2">
+                <img src="/static/images/logo.png" alt="Logo" class="logo_main">
+                <p class="header_shortcut_name_main"> FRMS </p>
             </div>
-            <h1 class="projectName">
-                First Reaction Medical System
-            </h1>
-            <button class="loginButton">
+            <div class="header_container_main_3">
+                <h1 class="header_project_name_main">
+                    First Reaction Medical System
+                </h1>
+            </div>
+            <!--<button class="loginButton">
                 Log in
-            </button>
+            </button>-->
         </div>
     </header>
 
-
-    <div class="container2">
-        <button class="buttonOnMainSite" onclick="window.location.href = '{{ url_for('register') }}' ;">
+    <!--Przyciski do nawigacji między pozostałymi widokami (database access, register)-->
+    <div class="body_container_main">
+        <button class="body_button_main_register" onclick="window.location.href = '{{ url_for('register') }}' ;">
             Register
         </button>
-        <button class="buttonOnMainSite" onclick="window.location.href = '{{ url_for('all') }}' ;">
+        <button class="body_button_main_database" onclick="window.location.href = '{{ url_for('all') }}' ;">
             Database access
         </button>
     </div>
-    
+
 
 
 
     <footer>
-        <div class="footerContainer">
-            <p class="ownershipFooterP">
+        <div class="footer_container_main">
+            <p class="footer_ownership_paragraph_main">
                 © Jastrzębski Myśliński Opoń Pomorski
             </p>
         </div>

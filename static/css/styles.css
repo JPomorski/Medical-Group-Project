@@ -261,3 +261,7 @@ button:hover {
 }
 
 
+path{
+    opacity: 0; /* Zmiana na przejrzyste */
+}
+

@@ -45,6 +45,7 @@ class PatientRegistration(Resource):
 def main():  # put application's code here
     return render_template('main_site.html')
 
+# registration panel
 @app.route('/register', methods=['GET', 'POST'])
 def register():  # put application's code here
     if request.method == 'POST':
@@ -58,6 +59,11 @@ def all():  # put application's code here
     return render_template('all.html', patients=patients)
 
 api.add_resource(PatientRegistration, '/register')
+
+# injuries panel
+@app.route('/body_injuries')
+def body_injuries():  # put application's code here
+    return render_template('body_injuries.html') 
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

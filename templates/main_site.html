@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fast af boi</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel=" icon" href="../static/images/logo.png" />
+</head>
+
+
+
+
+
+<body class="body_main">
+    <header>
+        <div class="header_container_main">
+            <div class="header_container_main_2">
+                <img src="/static/images/logo.png" alt="Logo" class="logo_main">
+                <p class="header_shortcut_name_main"> FRMS </p>
+            </div>
+            <div class="header_container_main_3">
+                <h1 class="header_project_name_main">
+                    First Reaction Medical System
+                </h1>
+            </div>
+            <!--<button class="loginButton">
+                Log in
+            </button>-->
+        </div>
+    </header>
+
+    <!--Przyciski do nawigacji między pozostałymi widokami (database access, register)-->
+    <div class="body_container_main">
+        <button class="body_button_main_register" onclick="window.location.href = '{{ url_for('register') }}' ;">
+            Register
+        </button>
+        <button class="body_button_main_database" onclick="window.location.href = '{{ url_for('all') }}' ;">
+            Database access
+        </button>
+    </div>
+
+
+
+
+    <footer>
+        <div class="footer_container_main">
+            <p class="footer_ownership_paragraph_main">
+                © Jastrzębski Myśliński Opoń Pomorski
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+
+
+
+
+
+</html>

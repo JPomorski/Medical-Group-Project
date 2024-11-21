@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Patient Registration Page</title>
     <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel=" icon" href="../static/images/logo.png" />
+
 </head>
 <body>
 <h2>Patient Registration Form:</h2>
 <div class="container">
-    <form id="registerForm">
+    <form id="register_form">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Name" required>
 
@@ -37,14 +39,21 @@
             <option value="O-">O-</option>
         </select>
 
-        <div class="submit-container">
-            <input type="submit" value="Register">
+
+
+        <div class="submit_container">
+            <input type="submit" value="Register" >
         </div>
+
+
+    </form>
+    <form class="submit_container" action="/body_injuries">
+        <input type="submit" value="Next" >
+    </form>
+    <form class="submit_container" action="/all">
+        <input type="submit" value="ALL PATIENTS" >
     </form>
 
-    <form class="submit-container" action="/all">
-        <input type="submit" value="ALL PATIENTS">
-    </form>
 </div>
 
 <script>

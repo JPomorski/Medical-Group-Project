@@ -6,13 +6,136 @@ body, h2, ul, form {
 
 /* Ustawienia dla całego ciała dokumentu */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Czcionka */
     background-color: #808080; /* Szare tło */
     display: flex;
-    flex-direction: column; /* Kolumnowe rozmieszczenie */
+    flex-direction: column;  /*Kolumnowe rozmieszczenie */
     align-items: center;
     justify-content: flex-start;
     height: 100vh; /* Wysokość 100% widoku */
+}
+.body_main {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/background_main.png'); /* Ustawienie tła oraz dodatkowego cienia */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+header {
+    background-color: rgba(255, 255, 255, 0.15); /* Kolor tła z efektem mgły */
+    width: 100%;
+    height: 150px;
+ 
+}
+.logo_main {
+    height: 90px;
+    width: 90px;
+}
+.header_container_main {
+    /*display: flex;
+    align-items: center;*/ /* Wyśrodkowanie elementów w pionie */
+    /*flex-direction: row;
+    justify-content: space-evenly;*/
+    position: relative;
+    margin-top: 12px;
+}
+
+
+.header_container_main_2{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Dopasowanie elementów do środka */
+    position: absolute; /* Umiesczenie bezględne */
+    left: 10%;
+    top: 2%;
+            
+}
+.header_container_main_3{
+    position: absolute;
+    left: 30%;
+    top: 10%;
+}
+
+
+.header_project_name_main {
+    font-size: 42px;
+    font-weight: 700;
+    padding: 10px 0;
+    color: #ffffff; /* Biały kolor tekstu */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Cień dla tekstu */
+
+}
+
+.header_shortcut_name_main{
+    font-size: 16px;
+    font-weight: 600; /* Grubość czcionki */
+    color: #ffffff; 
+    padding: 4px 8px;
+}
+
+.header_shortcut_name_main:hover {
+    transform: scale(1.1); /* Powiększenie przy najechaniu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Większy cień przy najechaniu */
+    cursor: pointer; /* Zmiana kursora, żeby było wiadomo, że można kliknąć  */
+}
+
+
+/*.loginButton {
+    width: 200px;*/ /* Szerokość 100% kontenera */
+    /*padding: 10px;
+    background-color: #4CAF50;*/ /* Kolor tła przycisku */
+    /*color: white;*/ /* Kolor tekstu */
+    /*border: none;*/ /* Bez obramowania */
+    /*border-radius: 5px;*/ /* Zaokrąglenie rogów */
+    /*cursor: pointer;*/ /* Zmieniony kursor na wskaźnik */
+    /*font-size: 16px;*/ /* Rozmiar czcionki */
+/*}*/
+/*.mainSiteBody::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);*/ /* Adjust color and opacity */
+    /*z-index: 1;
+}*/
+
+.body_container_main{
+    background-color: #dcdcdc; /* Jasno szary */
+    padding: 20px; /* Padding wewnętrzny */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
+    width: 100%; /* Szerokość 100% kontenera */
+    max-width: 400px; /* Maksymalna szerokość */
+    height: 100%; /* Wysokość 100% widoku */
+    max-height: 400px; /* Maksymalna wysokość */
+    display: flex; 
+    flex-direction: column; /* Ustawia elementy w kolumnie */
+    justify-content: space-around; /* Odsuwa elementy na równa odległość od końca i początku diva oraz od krawędzi */
+}
+.body_button_main_register, body_button_main_databse {
+    width: 100%; /* Szerokość 100% kontenera */
+    padding: 10px;
+    background-color: #4CAF50; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Bez obramowania */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmieniony kursor na wskaźnik */
+    font-size: 16px; /* Rozmiar czcionki */
+}
+.footer_container_main {
+    background-color: rgba(255, 255, 255, 0.15);
+    width: 100%;
+    text-align: center; /* Rozmieszczenie tekstu w centrum */
+    position: fixed; /* Stała pozycja względem przeglądarki */
+    bottom: 0;
+    left: 0;
+}
+
+.footer_ownership_paraghraph_main {
+    color: #FFF;
 }
 
 /* Stylizacja nagłówka */
@@ -76,7 +199,7 @@ li {
 }
 
 /* Stylizacja kontenera dla przycisku */
-.submit-container {
+.submit_container {
     display: flex; /* Umożliwia elastyczne rozmieszczenie */
     justify-content: center; /* Wyśrodkowanie poziome */
     margin-top: 20px; /* Odstęp górny */
@@ -112,7 +235,7 @@ button:hover {
 }
 
 /* Stylizacja treści modalnego okienka */
-.modal-content {
+.modal_content {
     background-color: #f0f0f0; /* Jasno szary kolor modalnego okienka */
     margin: 15% auto; /* Marginesy dla centrowania */
     padding: 20px;
@@ -136,3 +259,9 @@ button:hover {
     text-decoration: none; /* Bez podkreślenia */
     cursor: pointer; /* Zmieniony kursor na wskaźnik */
 }
+
+
+path{
+    opacity: 0; /* Zmiana na przejrzyste */
+}
+

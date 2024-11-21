@@ -12,3 +12,4 @@
 
 ## Preview Image
 ![Preview Image](/static/images/Preview.png)
+![Preview Image](/static/images/rawPreview.jpg)

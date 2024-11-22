@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <title>Patient Registration Page</title>
     <link rel="stylesheet" href="../static/css/styles.css">
-    <link rel=" icon" href="../static/images/logo.png" />
+    <link rel="icon" href="../static/images/logo.png" />
 
 </head>
 <body>
 <h2>Patient Registration Form:</h2>
+<div class="top-right-buttons">
+    <form action="/body_injuries" class="custom-form">
+        <input type="submit" value="Next">
+    </form>
+    <form action="/all" class="custom-form">
+        <input type="submit" value="ALL PATIENTS">
+    </form>
+</div>
 <div class="container">
     <form id="register_form">
         <label for="name">Name</label>
@@ -24,7 +32,7 @@
         <select id="gender" name="gender" required>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            {#            <option value="Other">Other</option>#}
         </select>
 
         <label for="blood_type">Blood Type</label>
@@ -39,26 +47,64 @@
             <option value="O-">O-</option>
         </select>
 
+        <label for="allergies">Allergies</label>
+        <select id="allergies" name="allergies" required onchange="toggle_other_field('allergies', 'other_allergy')">
+            <option value="None">None</option>
+            <option value="Animals allergy">Animals allergy</option>
+            <option value="Lactose allergy">Lactose allergy</option>
+            <option value="Peanut allergy">Peanut allergy</option>
+            <option value="Latex allergy">Latex allergy</option>
+            <option value="Insect sting allergy">Insect sting allergy</option>
+            <option value="Pollen allergy">Pollen allergy</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="other_allergy" name="other_allergy" placeholder="Specify allergy" style="display: none;">
 
+        <label for="diseases">Diseases</label>
+        <select id="diseases" name="diseases" required onchange="toggle_other_field('diseases', 'other_disease')">
+            <option value="None">None</option>
+            <option value="Diabetes">Diabetes</option>
+            <option value="Hypertension">Hypertension</option>
+            <option value="Heart disease">Heart disease</option>
+            <option value="Epilepsy">Epilepsy</option>
+            <option value="Parkinson's disease">Parkinson's disease</option>
+            <option value="Alzheimer's disease">Alzheimer's disease</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="other_disease" name="other_disease" placeholder="Specify disease" style="display: none;">
 
-        <div class="submit_container">
-            <input type="submit" value="Register" >
+        <label for="on_medication">Is the patient on medication?</label>
+        <input type="checkbox" id="on_medication" name="on_medication"><br><br>
+
+        <div class="submit-container">
+            <input type="submit" value="Register">
         </div>
-
-
     </form>
-    <form class="submit_container" action="/body_injuries">
-        <input type="submit" value="Next" >
-    </form>
-    <form class="submit_container" action="/all">
-        <input type="submit" value="ALL PATIENTS" >
-    </form>
+{#    <form class="submit_container" action="/body_injuries">#}
+{#        <input type="submit" value="Next" >#}
+{#    </form>#}
+{#    <form class="submit_container" action="/all">#}
+{#        <input type="submit" value="ALL PATIENTS" >#}
+{#    </form>#}
 
 </div>
 
 <script>
+    // Funkcja do pokazywania/ukrywania pola tekstowego "Other"
+    function toggle_other_field(select_id, text_field_id) {
+        const select_element = document.getElementById(select_id);
+        const text_field = document.getElementById(text_field_id);
+
+        if (select_element.value === 'Other') {
+            text_field.style.display = 'block';
+        } else {
+            text_field.style.display = 'none';
+            text_field.value = ''; // Resetuj wartość pola
+        }
+    }
     // Obsługa formularza rejestracji
-    document.getElementById('registerForm').addEventListener('submit', async function(event) {
+    // Obsługa formularza rejestracji
+    document.getElementById('register_form').addEventListener('submit', async function(event) {
         event.preventDefault();
 
         // Pobieranie danych z formularza
@@ -67,6 +113,23 @@
         const age = document.getElementById('age').value;
         const gender = document.getElementById('gender').value;
         const blood_type = document.getElementById('blood_type').value;
+        const on_medication = document.getElementById('on_medication').checked ? 'Yes' : 'No';
+
+        // Pobranie wybranej alergii i choroby
+        const allergies = document.getElementById('allergies').value;
+        const diseases = document.getElementById('diseases').value;
+
+        // Obsługa pola "Other" dla alergii
+        const other_allergy_text = document.getElementById('other_allergy').value;
+        const final_allergy = allergies === 'Other' && other_allergy_text.trim() !== ''
+            ? `${allergies}: ${other_allergy_text}`
+            : allergies;
+
+        // Obsługa pola "Other" dla chorób
+        const other_disease_text = document.getElementById('other_disease').value;
+        const final_disease = diseases === 'Other' && other_disease_text.trim() !== ''
+            ? `${diseases}: ${other_disease_text}`
+            : diseases;
 
         try {
             // Wysyłanie żądania POST w formacie JSON
@@ -75,7 +138,16 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name, surname, age, gender, blood_type })
+                body: JSON.stringify({
+                    name,
+                    surname,
+                    age,
+                    gender,
+                    blood_type,
+                    allergies: final_allergy,
+                    diseases: final_disease,
+                    on_medication
+                })
             });
 
             // Odbieranie odpowiedzi z serwera
@@ -84,7 +156,7 @@
             if (response.ok) {
                 alert('Patient registered successfully!');
                 // Możesz opcjonalnie zresetować formularz
-                document.getElementById('registerForm').reset();
+                document.getElementById('register_form').reset();
             } else {
                 alert('Error: ' + result.message);
             }
@@ -92,6 +164,7 @@
             alert('Error: ' + error.message);
         }
     });
+
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 - `git push -u origin master`
 
 ## Preview Image
-![Preview Image](/static/images/Preview.png)
-![Preview Image](/static/images/rawPreview.jpg)
-![Preview Image](/static/images/Body_Preview.png)
+![Preview Image](/static/images/previews/rawPreview.jpg)
+![Preview Image](/static/images/previews/Preview.png)
+![Preview Image](/static/images/previews/Body_Preview.png)
+![Preview Image](/static/images/previews/All_Preview.png)

@@ -16,7 +16,9 @@ class Patient(db.Model):
     age = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(100), nullable=False)
     blood_type = db.Column(db.String(100), nullable=False)
-    #allergies = db.Column(db.String(100))
+    allergies = db.Column(db.String(100))
+    diseases = db.Column(db.String(100))
+    on_medication = db.Column(db.Boolean, default=False)
 
 with app.app_context():
     db.create_all()
@@ -28,13 +30,16 @@ class PatientRegistration(Resource):
         age = data['age']
         gender = data['gender']
         blood_type = data['blood_type']
+        allergies = data['allergies']
+        diseases = data['diseases']
+        on_medication = True if 'on_medication' in request.form else False
 
         if not name or not surname or not age or not gender or not blood_type:
             return {'message' : 'Missing information'}, 400
         # if Patient.query.filter_by(username = username).first():
         #     return {'message' : 'Username already taken'}, 400
 
-        new_patient = Patient(name = name, surname = surname, age = age, gender = gender, blood_type = blood_type)
+        new_patient = Patient(name = name, surname = surname, age = age, gender = gender, blood_type = blood_type, allergies = allergies, diseases = diseases, on_medication = on_medication)
         db.session.add(new_patient)
         db.session.commit()
         return {'message' : 'Patient added successfully'}, 200
@@ -63,7 +68,7 @@ api.add_resource(PatientRegistration, '/register')
 # injuries panel
 @app.route('/body_injuries')
 def body_injuries():  # put application's code here
-    return render_template('body_injuries.html') 
+    return render_template('body_injuries.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

@@ -13,3 +13,4 @@
 ## Preview Image
 ![Preview Image](/static/images/Preview.png)
 ![Preview Image](/static/images/rawPreview.jpg)
+![Preview Image](/static/images/Body_Preview.png)

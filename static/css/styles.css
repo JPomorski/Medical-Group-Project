@@ -350,3 +350,26 @@ path:hover {
     background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
 }
 
+.top-right-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column; /* Jeden przycisk pod drugim */
+    gap: 10px; /* Odstęp między przyciskami */
+}
+
+.top-right-buttons input[type="submit"] {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #8049e4; /* Niebieski kolor */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.top-right-buttons input[type="submit"]:hover {
+    background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
+}
+

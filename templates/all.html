@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <title>All Patient Forms Page</title>
     <link rel="stylesheet" href="../static/css/styles.css">
-    <link rel=" icon" href="../static/images/logo.png" />
+    <link rel="icon" href="../static/images/logo.png" />
 
 </head>
 <body>
 <h2>All Patient Forms:</h2>
-
+<div class="top-right-buttons">
+    <form action="/register" class="custom-form">
+        <input type="submit" value="ADD PATIENT">
+    </form>
+</div>
 <ul>
     {% for patient in patients %}
         <li>
-            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}')">
+            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}')">
                 {{ patient.name }} {{ patient.surname }}
             </button>
         </li>
     {% endfor %}
 </ul>
 
-<form class="submit_container" action="register">
-    <input type="submit" value="ADD PATIENT">
-</form>
+
 
 <!-- Modalne okienko -->
 <div id="patient_modal" class="modal">
@@ -34,17 +36,23 @@
         <p><strong>Age:</strong> <span id="modal_age"></span></p>
         <p><strong>Gender:</strong> <span id="modal_gender"></span></p>
         <p><strong>Blood Type:</strong> <span id="modal_blood_type"></span></p>
+        <p><strong>Allergies:</strong> <span id="modal_allergies"></span></p>
+        <p><strong>Diseases:</strong> <span id="modal_diseases"></span></p>
+        <p><strong>On medication:</strong> <span id="modal_on_medication"></span></p>
     </div>
 </div>
 
 <script>
     // Funkcja do pokazywania modala z danymi pacjenta
-    function show_modal(name, surname, age, gender, blood_type) {
+    function show_modal(name, surname, age, gender, blood_type, allergies, diseases, on_medication) {
         document.getElementById('modal_name').innerText = name;
         document.getElementById('modal_surname').innerText = surname;
         document.getElementById('modal_age').innerText = age;
         document.getElementById('modal_gender').innerText = gender;
         document.getElementById('modal_blood_type').innerText = blood_type;
+        document.getElementById('modal_allergies').innerText = allergies;
+        document.getElementById('modal_diseases').innerText = diseases;
+        document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
 
         // Pokazanie modala
         document.getElementById('patient_modal').style.display = 'block';

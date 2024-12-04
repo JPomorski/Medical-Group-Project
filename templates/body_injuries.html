@@ -121,7 +121,7 @@
         <form class="submit_container" action="/register">
             <input type="submit" value="Previous">
         </form>
-        <form class="submit_container" <!--action=""-->>
+        <form class="submit_container">
             <input type="submit" value="Next" id="smile">
         </form>
     </div>
@@ -135,7 +135,42 @@
                 if (human_body_svg) {
                     html2canvas(human_body_svg).then(canvas => {
                         const injuriesImgData = canvas.toDataURL('image/png');
-                        localStorage.setItem('injuries_data', injuriesImgData);
+                        localStorage.setItem('injuries_img', injuriesImgData);
+                        let injuries_descriptions = '';
+                        for (let part in body_part_data) {
+                            injuries_descriptions += body_part_data[part].description + ":" + body_part_data[part].comment + ";";
+                        }
+                        for (patient in patients) {
+                            if (patient.name + " " + patient.surname == localStorage.getItem('name and surname')) {
+                               /* try {
+                                    // Wysyłanie żądania POST w formacie JSON
+                                    const response = await fetch('/register', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            injuries_description,
+                                            injuries_view
+                                        })
+                                    });
+
+                                    // Odbieranie odpowiedzi z serwera
+                                    const result = await response.json();
+
+                                    if (response.ok) {
+                                        alert('Patient registered successfully!');
+                                        // Możesz opcjonalnie zresetować formularz
+                                        document.getElementById('register_form').reset();
+                                    } else {
+                                        alert('Error: ' + result.message);
+                                    }
+                                } catch (error) {
+                                    alert('Error: ' + error.message);
+                                }*/
+                            }
+                        }
+
                     }).catch(error => {
                         console.error('Error capturing the page:', error);
                     });

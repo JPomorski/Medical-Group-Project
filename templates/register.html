@@ -115,6 +115,8 @@
         const blood_type = document.getElementById('blood_type').value;
         const on_medication = document.getElementById('on_medication').checked ? 'Yes' : 'No';
 
+        localStorage.setItem("name and surname", JSON.stringify(name + " " + surname));
+
         // Pobranie wybranej alergii i choroby
         const allergies = document.getElementById('allergies').value;
         const diseases = document.getElementById('diseases').value;
@@ -131,7 +133,7 @@
             ? `${diseases}: ${other_disease_text}`
             : diseases;
 
-        try {
+        /*try {
             // Wysyłanie żądania POST w formacie JSON
             const response = await fetch('/register', {
                 method: 'POST',
@@ -162,7 +164,7 @@
             }
         } catch (error) {
             alert('Error: ' + error.message);
-        }
+        }*/
     });
 
 </script>

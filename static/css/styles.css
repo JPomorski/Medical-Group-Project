@@ -373,3 +373,7 @@ path:hover {
     background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
 }
 
+#svg_container{
+    background: url(/static/images/human_body_model.jpg)
+}
+

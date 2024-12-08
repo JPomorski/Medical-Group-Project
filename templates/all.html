@@ -17,7 +17,7 @@
 <ul>
     {% for patient in patients %}
         <li>
-            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}')">
+            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}', '{{ patient.injuries_description }}', '{{ patient.injuries_view }}' )">
                 {{ patient.name }} {{ patient.surname }}
             </button>
         </li>
@@ -39,12 +39,14 @@
         <p><strong>Allergies:</strong> <span id="modal_allergies"></span></p>
         <p><strong>Diseases:</strong> <span id="modal_diseases"></span></p>
         <p><strong>On medication:</strong> <span id="modal_on_medication"></span></p>
-    </div>
+        <p><strong>Injuries description:</strong> <span id="modal_injuries_description"></span></p>
+<!--        <p><strong>Injuries view:</strong> <span id="modal_injuries_view"></span></p>
+-->    </div>
 </div>
 
 <script>
     // Funkcja do pokazywania modala z danymi pacjenta
-    function show_modal(name, surname, age, gender, blood_type, allergies, diseases, on_medication) {
+    function show_modal(name, surname, age, gender, blood_type, allergies, diseases, on_medication, injuries_description, injuries_view) {
         document.getElementById('modal_name').innerText = name;
         document.getElementById('modal_surname').innerText = surname;
         document.getElementById('modal_age').innerText = age;
@@ -53,7 +55,9 @@
         document.getElementById('modal_allergies').innerText = allergies;
         document.getElementById('modal_diseases').innerText = diseases;
         document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
-
+        document.getElementById('modal_injuries_description').innerText = injuries_description.replaceAll(':', ' ').replaceAll(';','\n');
+/*        document.getElementById('modal_injuries_view').inner = injuries_view;
+*/
         // Pokazanie modala
         document.getElementById('patient_modal').style.display = 'block';
     }

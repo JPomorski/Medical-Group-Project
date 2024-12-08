@@ -144,6 +144,25 @@ h2 {
     margin: 20px 0;
     color: white; /* Kolor nagłówka */
 }
+.container {
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    height: 88vh;
+    width: 80%;
+    /*background-color: whitesmoke;*/
+}
+
+/*.register_form_container{
+   height: 88vh;
+}
+    */
+#register_form{
+    height: 576px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
 
 /* Stylizacja formularza */
 form {
@@ -324,9 +343,6 @@ path:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-
-
 .top-right-buttons {
     position: absolute;
     top: 10px;
@@ -374,6 +390,6 @@ path:hover {
 }
 
 #svg_container{
-    background: url(/static/images/human_body_model.jpg)
+    background: url(/static/images/human_body_model.jpg);
 }
 

@@ -26,7 +26,7 @@ header {
     background-color: rgba(255, 255, 255, 0.15); /* Kolor tła z efektem mgły */
     width: 100%;
     height: 150px;
- 
+
 }
 .logo_main {
     height: 90px;
@@ -44,12 +44,12 @@ header {
 
 .header_container_main_2{
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center; /* Dopasowanie elementów do środka */
     position: absolute; /* Umiesczenie bezględne */
     left: 10%;
     top: 2%;
-            
+
 }
 .header_container_main_3{
     position: absolute;
@@ -70,7 +70,7 @@ header {
 .header_shortcut_name_main{
     font-size: 16px;
     font-weight: 600; /* Grubość czcionki */
-    color: #ffffff; 
+    color: #ffffff;
     padding: 4px 8px;
 }
 
@@ -111,7 +111,7 @@ header {
     max-width: 400px; /* Maksymalna szerokość */
     height: 100%; /* Wysokość 100% widoku */
     max-height: 400px; /* Maksymalna wysokość */
-    display: flex; 
+    display: flex;
     flex-direction: column; /* Ustawia elementy w kolumnie */
     justify-content: space-around; /* Odsuwa elementy na równa odległość od końca i początku diva oraz od krawędzi */
 }
@@ -144,6 +144,32 @@ h2 {
     margin: 20px 0;
     color: white; /* Kolor nagłówka */
 }
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Elementy rozstawione na boki */
+    align-items: flex-start; /* Wyrównanie elementów do góry */
+    height: 100vh; /* Wysokość na cały ekran */
+    padding: 20px;
+    box-sizing: border-box; /* Włączenie paddingu do kalkulacji szerokości */
+}
+
+.left {
+    width: 60%; /* 48% szerokości, aby zostawić odstęp */
+
+    padding: 10px;
+
+}
+
+.right {
+    width: 80%; /* 48% szerokości, aby zostawić odstęp */
+    border-radius: 10px;
+    background-color: #dcdcdc;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.85) translateY(-60px);
+}
+
 
 /* Stylizacja formularza */
 form {

@@ -19,6 +19,7 @@ def delete_data():
 
     # Usuń starą tabelę
     cursor.execute('DROP TABLE patient')
+    cursor.execute('DROP TABLE svg_record')
 
     # Zatwierdź zmiany i zamknij połączenie
     conn.commit()

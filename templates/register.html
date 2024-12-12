@@ -267,6 +267,25 @@
             if (data.message) {
                 alert('Patient registered, SVG, and descriptions saved successfully!');
                 document.getElementById('register_form').reset();
+
+
+                // Ustawianie domyślnych wartości dla "Other" fields
+                document.getElementById('allergies').value = 'None'; // Ustawienie wartości "None" dla alergii
+                document.getElementById('other_allergy').value = ''; // Resetowanie tekstu alergii "Other"
+                document.getElementById('diseases').value = 'None'; // Ustawienie wartości "None" dla chorób
+                document.getElementById('other_disease').value = ''; // Resetowanie tekstu chorób "Other"
+
+                // Ukrycie pola "Other" po wysłaniu formularza, jeśli wybór nie jest "Other"
+                toggle_other_field('allergies', 'other_allergy');
+                toggle_other_field('diseases', 'other_disease');
+
+                // Usuń tylko efekty podświetlenia, zachowując funkcjonalność hover
+                document.querySelectorAll(".selected").forEach(element => {
+                    element.classList.remove("selected"); // Usuwamy klasę `selected`
+                    element.style.opacity = ""; // Usuwamy inline-style, by hover działało poprawnie
+                });
+
+
             } else {
                 alert('Failed to register patient or save data.');
             }

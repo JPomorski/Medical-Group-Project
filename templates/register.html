@@ -307,53 +307,59 @@
         const pathElement = event.currentTarget;
         const bodyPart = pathElement.dataset.bodyPart; // Pobranie wartości 'data-body-part'
 
-        const isAlreadyHighlighted = parseFloat(getComputedStyle(pathElement).opacity) >= 1;
+        const isAlreadyHighlighted = pathElement.classList.contains("selected");
 
-        if (!isAlreadyHighlighted) {
-            // Jeśli element nie jest podświetlony, podświetl go
+        // Wyświetlenie formularza
+        document.getElementById('body_part_form').style.display = "block";
+        document.getElementById('form_legend').innerText = `Details for ${bodyPart.replaceAll('_', ' ')}`;
+
+        // Pobieranie istniejących danych, jeśli element był wcześniej podświetlony
+        const existingData = bodyPartData[bodyPart] || { description: '', comment: '' };
+        document.getElementById('textinput').value = existingData.description;
+        document.getElementById('textarea').value = existingData.comment;
+
+        // Obsługa przycisku OK
+        document.getElementById('body_part_form_group_ok_button').onclick = function (e) {
+            e.preventDefault();
+
+            // Zapisujemy dane
+            bodyPartData[bodyPart] = {
+                description: document.getElementById('textinput').value,
+                comment: document.getElementById('textarea').value,
+            };
+
+            // Podświetlenie elementu
             pathElement.style.transition = "opacity 0.3s";
             pathElement.style.opacity = "1";
             pathElement.classList.add("selected");
 
-            document.getElementById('body_part_form').style.display = "block";
-            document.getElementById('form_legend').innerText = `Details for ${bodyPart.replaceAll('_', ' ')}`;
+            // Zamykamy formularz
+            document.getElementById('body_part_form').style.display = "none";
+        };
 
-            const existingData = bodyPartData[bodyPart] || { description: '', comment: '' };
-            document.getElementById('textinput').value = existingData.description;
-            document.getElementById('textarea').value = existingData.comment;
-
-            document.getElementById('body_part_form_group_ok_button').onclick = function (e) {
-                e.preventDefault();
-                bodyPartData[bodyPart] = {
-                    description: document.getElementById('textinput').value,
-                    comment: document.getElementById('textarea').value,
-                };
-                document.getElementById('body_part_form').style.display = "none";
-            };
-
-            document.getElementById('body_part_form_group_cancel_button').onclick = function () {
-                document.getElementById('body_part_form').style.display = "none";
-                pathElement.style.transition = "opacity 0.3s";
-                pathElement.style.opacity = "0";
-                pathElement.classList.remove("selected");
-            };
-        } else {
-            // Jeśli kliknięto w już podświetlony element, wykonaj czyszczenie
-            pathElement.style.transition = "opacity 0.3s";
-            pathElement.style.opacity = "0";
-            pathElement.classList.remove("selected");
+        // Obsługa przycisku Cancel
+        document.getElementById('body_part_form_group_cancel_button').onclick = function () {
+            // Jeśli element był wcześniej podświetlony, usuwamy dane
+            if (isAlreadyHighlighted) {
+                delete bodyPartData[bodyPart];
+            }
 
             // Wyczyszczenie pól w formularzu
             document.getElementById('textinput').value = '';
             document.getElementById('textarea').value = '';
-            document.getElementById('body_part_form').style.display = "none";
 
-            // Wyczyść dane wewnętrzne dla tego elementu
-            delete bodyPartData[bodyPart];
-        }
+            // Odznaczenie elementu
+            pathElement.style.transition = "opacity 0.3s";
+            pathElement.style.opacity = "";
+            pathElement.classList.remove("selected");
+
+            // Zamknięcie formularza
+            document.getElementById('body_part_form').style.display = "none";
+        };
 
         event.stopPropagation();
     }
+
 </script>
 </body>
 </html>

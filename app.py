@@ -102,24 +102,6 @@ def all():  # put application's code here
 
 api.add_resource(PatientRegistration, '/register')
 
-# injuries panel
-@app.route('/body_injuries')
-def body_injuries():  # put application's code here
-    return render_template('body_injuries.html')
-
-@app.route('/save_svg', methods=['POST'])
-def save_svg():
-    data = request.get_json()
-    svg_content = data.get('svg_content')
-
-    if svg_content:
-        new_svg = SVGRecord(svg_content=svg_content)
-        db.session.add(new_svg)
-        db.session.commit()
-        return jsonify({'message': 'SVG saved successfully'}), 200
-
-    return jsonify({'error': 'Invalid SVG data'}), 400
-
 @app.route('/display_svg_with_bg/<int:svg_id>', methods=['GET'])
 def display_svg_with_bg(svg_id):
     svg_record = SVGRecord.query.get(svg_id)

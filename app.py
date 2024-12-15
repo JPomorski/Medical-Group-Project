@@ -19,15 +19,19 @@ class Patient(db.Model):
     allergies = db.Column(db.String(100))
     diseases = db.Column(db.String(100))
     on_medication = db.Column(db.Boolean, default=False)
-
-class SVGRecord(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
     svg_content = db.Column(db.Text, nullable=False)  # Przechowuje zawartość SVG
     descriptions = db.Column(db.Text, nullable=True)  # Pole na opisy
     timestamp = db.Column(db.DateTime, server_default=db.func.now())  # Data zapisu
 
+# class SVGRecord(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     svg_content = db.Column(db.Text, nullable=False)  # Przechowuje zawartość SVG
+#     descriptions = db.Column(db.Text, nullable=True)  # Pole na opisy
+#     timestamp = db.Column(db.DateTime, server_default=db.func.now())  # Data zapisu
+
 with app.app_context():
     db.create_all()
+
 class PatientRegistration(Resource):
     def post(self):
         data = request.json
@@ -42,6 +46,10 @@ class PatientRegistration(Resource):
         diseases = data.get('diseases')
         on_medication = data.get('on_medication', '').lower() == 'yes'
 
+        # Pobieranie danych SVG i opisów
+        svg_content = data.get('svg_content')
+        descriptions = data.get('descriptions')
+
         # Walidacja wymaganych danych
         if not name or not surname or not age or not gender or not blood_type:
             return jsonify({'message': 'Missing information'}), 400
@@ -55,23 +63,13 @@ class PatientRegistration(Resource):
             blood_type=blood_type,
             allergies=allergies,
             diseases=diseases,
-            on_medication=on_medication
+            on_medication=on_medication,
+            svg_content=svg_content,  # Zapis SVG
+            descriptions=descriptions  # Zapis opisów
         )
 
         db.session.add(new_patient)
         db.session.commit()
-
-        # Pobieranie i zapisywanie danych SVG oraz opisów
-        svg_content = data.get('svg_content')
-        descriptions = data.get('descriptions')
-
-        if svg_content or descriptions:
-            new_svg_record = SVGRecord(
-                svg_content=svg_content or '',
-                descriptions=descriptions or ''  # Upewnienie się, że pole jest wypełnione, nawet jeśli brak opisów
-            )
-            db.session.add(new_svg_record)
-            db.session.commit()
 
         message = 'Patient added successfully'
         if svg_content:
@@ -102,23 +100,23 @@ def all():  # put application's code here
 
 api.add_resource(PatientRegistration, '/register')
 
-@app.route('/display_svg_with_bg/<int:svg_id>', methods=['GET'])
-def display_svg_with_bg(svg_id):
-    svg_record = SVGRecord.query.get(svg_id)
-    if not svg_record:
-        return "SVG not found", 404
+@app.route('/display_svg_with_bg/<int:patient_id>', methods=['GET'])
+def display_svg_with_bg(patient_id):
+    patient = Patient.query.get(patient_id)
+    if not patient or not patient.svg_content:
+        return "SVG not found or patient has no SVG data", 404
 
     # Dodanie obrazu tła do SVG
     svg_with_bg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="612" height="612" preserveAspectRatio="none">
         <image width="612" height="612" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
-        {svg_record.svg_content}
+        {patient.svg_content}
     </svg>"""
 
     # Przekazanie opisów do szablonu
     return render_template(
         'display_svg.html',
         svg_content=svg_with_bg,
-        descriptions=svg_record.descriptions
+        descriptions=patient.descriptions
     )
 
 

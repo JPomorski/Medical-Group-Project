@@ -9,8 +9,8 @@
 </head>
 <body>
     <h2>Patient Registration Form:</h2>
-    <div class="top-right-buttons">
-        <form action="/all" class="custom-form">
+    <div class="top_right_buttons">
+        <form action="/all" class="custom_form">
             <input type="submit" value="ALL PATIENTS">
         </form>
     </div>
@@ -75,7 +75,7 @@
                 <label for="on_medication">Is the patient on medication?</label>
                 <input type="checkbox" id="on_medication" name="on_medication"><br><br>
 
-                <div class="submit-container">
+                <div class="submit_container">
                     <input type="submit" value="Register">
                 </div>
             </form>
@@ -215,7 +215,7 @@
                 : diseases;
 
             // Tworzymy obiekt pacjenta do wysłania
-            const patientData = {
+            const patient_data = {
                 name,
                 surname,
                 age,
@@ -227,34 +227,34 @@
             };
 
             // Zbieranie danych SVG (jeśli są)
-            const svgElement = document.querySelector("svg");
-            let svgData = null;
+            const svg_element = document.querySelector("svg");
+            let svg_data = null;
 
-            if (svgElement) {
+            if (svg_element) {
                 // Tworzymy nowy SVG tylko z zaznaczonymi elementami
-                const newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                newSvg.setAttribute("width", svgElement.getAttribute("width"));
-                newSvg.setAttribute("height", svgElement.getAttribute("height"));
+                const new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                new_svg.setAttribute("width", svg_element.getAttribute("width"));
+                new_svg.setAttribute("height", svg_element.getAttribute("height"));
 
                 // Dodanie tylko zaznaczonych części do nowego SVG
                 document.querySelectorAll('.selected').forEach(el => {
                     const clone = el.cloneNode(true);
-                    newSvg.appendChild(clone);
+                    new_svg.appendChild(clone);
                 });
 
                 // Serializacja SVG
-                svgData = new XMLSerializer().serializeToString(newSvg);
+                svg_data = new XMLSerializer().serializeToString(new_svg);
             }
 
             // Zbieranie opisów (descriptions)
-            const descriptions = Object.entries(bodyPartData)
-                .map(([bodyPart, data]) => `${bodyPart}: Description - ${data.description}, Comment - ${data.comment}`)
+            const descriptions = Object.entries(body_part_data)
+                .map(([body_part, data]) => `${body_part}: Description - ${data.description}, Comment - ${data.comment}`)
                 .join("\n");
 
             // Połączenie danych pacjenta, SVG i opisów
-            const formData = {
-                ...patientData,
-                svg_content: svgData,   // Dodanie danych SVG
+            const form_data = {
+                ...patient_data,
+                svg_content: svg_data,   // Dodanie danych SVG
                 descriptions: descriptions // Dodanie danych opisów
             };
 
@@ -265,7 +265,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(form_data)
                 });
 
                 const data = await response.json();
@@ -301,42 +301,42 @@
     </script>
 
     <script>
-        const bodyPartData = {};
+        const body_part_data = {};
 
         // Dodanie nasłuchiwania na kliknięcie do wszystkich elementów 'path'
         document.querySelectorAll("path").forEach(path => {
-            path.addEventListener("click", bodyPartClicked);
+            path.addEventListener("click", body_part_clicked);
         });
 
-        function bodyPartClicked(event) {
-            const pathElement = event.currentTarget;
-            const bodyPart = pathElement.dataset.bodyPart; // Pobranie wartości 'data-body-part'
+        function body_part_clicked(event) {
+            const path_element = event.currentTarget;
+            const body_part = path_element.dataset.body_part; // Pobranie wartości 'data-body-part'
 
-            const isAlreadyHighlighted = pathElement.classList.contains("selected");
+            const is_already_highlighted = path_element.classList.contains("selected");
 
             // Wyświetlenie formularza
             document.getElementById('body_part_form').style.display = "block";
-            document.getElementById('form_legend').innerText = `Details for ${bodyPart.replaceAll('_', ' ')}`;
+            document.getElementById('form_legend').innerText = `Details for ${body_part.replaceAll('_', ' ')}`;
 
             // Pobieranie istniejących danych, jeśli element był wcześniej podświetlony
-            const existingData = bodyPartData[bodyPart] || { description: '', comment: '' };
-            document.getElementById('textinput').value = existingData.description;
-            document.getElementById('textarea').value = existingData.comment;
+            const existing_data = body_part_data[body_part] || { description: '', comment: '' };
+            document.getElementById('textinput').value = existing_data.description;
+            document.getElementById('textarea').value = existing_data.comment;
 
             // Obsługa przycisku OK
             document.getElementById('body_part_form_group_ok_button').onclick = function (e) {
                 e.preventDefault();
 
                 // Zapisujemy dane
-                bodyPartData[bodyPart] = {
+                body_part_data[body_part] = {
                     description: document.getElementById('textinput').value,
                     comment: document.getElementById('textarea').value,
                 };
 
                 // Podświetlenie elementu
-                pathElement.style.transition = "opacity 0.3s";
-                pathElement.style.opacity = "1";
-                pathElement.classList.add("selected");
+                path_element.style.transition = "opacity 0.3s";
+                path_element.style.opacity = "1";
+                path_element.classList.add("selected");
 
                 // Zamykamy formularz
                 document.getElementById('body_part_form').style.display = "none";
@@ -345,8 +345,8 @@
             // Obsługa przycisku Cancel
             document.getElementById('body_part_form_group_cancel_button').onclick = function () {
                 // Jeśli element był wcześniej podświetlony, usuwamy dane
-                if (isAlreadyHighlighted) {
-                    delete bodyPartData[bodyPart];
+                if (is_already_highlighted) {
+                    delete body_part_data[body_part];
                 }
 
                 // Wyczyszczenie pól w formularzu
@@ -354,9 +354,9 @@
                 document.getElementById('textarea').value = '';
 
                 // Odznaczenie elementu
-                pathElement.style.transition = "opacity 0.3s";
-                pathElement.style.opacity = "";
-                pathElement.classList.remove("selected");
+                path_element.style.transition = "opacity 0.3s";
+                path_element.style.opacity = "";
+                path_element.classList.remove("selected");
 
                 // Zamknięcie formularza
                 document.getElementById('body_part_form').style.display = "none";

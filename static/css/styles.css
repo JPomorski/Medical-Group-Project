@@ -183,7 +183,7 @@ form {
     max-width: 400px; /* Maksymalna szerokość */
 }
 
-.custom-form {
+.custom_form {
     margin: 0; /* Usuń margines */
     background: none; /* Brak tła */
     padding: 0; /* Usuń odstępy */
@@ -357,7 +357,7 @@ path {
 
 
 
-.top-right-buttons {
+.top_right_buttons {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -366,7 +366,7 @@ path {
     gap: 10px; /* Odstęp między przyciskami */
 }
 
-    .top-right-buttons input[type="submit"] {
+    .top_right_buttons input[type="submit"] {
         padding: 5px 10px;
         font-size: 14px;
         background-color: #8049e4; /* Niebieski kolor */
@@ -376,11 +376,11 @@ path {
         cursor: pointer;
     }
 
-        .top-right-buttons input[type="submit"]:hover {
+        .top_right_buttons input[type="submit"]:hover {
             background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
         }
 
-.top-right-buttons {
+.top_right_buttons {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -389,7 +389,7 @@ path {
     gap: 10px; /* Odstęp między przyciskami */
 }
 
-    .top-right-buttons input[type="submit"] {
+    .top_right_buttons input[type="submit"] {
         padding: 5px 10px;
         font-size: 14px;
         background-color: #8049e4; /* Niebieski kolor */
@@ -399,6 +399,6 @@ path {
         cursor: pointer;
     }
 
-        .top-right-buttons input[type="submit"]:hover {
+        .top_right_buttons input[type="submit"]:hover {
             background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
         }

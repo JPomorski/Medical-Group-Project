@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display SVG with Background</title>
+</head>
+<body>
+    <h1>SVG View with Background</h1>
+    <div>
+        <div id="svg-container">
+            {{ svg_content | safe }}
+        </div>
+        <div id="descriptions">
+            <h2>Descriptions</h2>
+            <pre>{{ descriptions }}</pre>
+        </div>
+    </div>
+</body>
+</html>

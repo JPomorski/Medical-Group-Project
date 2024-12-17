@@ -92,7 +92,7 @@
         </div>
         <div class="right">
             <div id="svg_container">
-                <svg id="human_body_svg" width="612" height="612" version="1.1" viewBox="0 0 612 612" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg id="human_body_svg" width="612" height="612" viewBox="0 0 612 612" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g>
                         <image width="612" height="612" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
                         <path class="back_right_thigh" data-body-part="back_right_thigh" d="m486.3 333.2 0.2177 9.395-0.0247 6.603-0.3506 5.405-0.1845 5.438s-0.5393 5.858-0.4694 5.648c0.07-0.2099-0.5068 6.113-0.5068 6.113s-0.6008 6.092-0.6008 6.372c0 0.2799-1.297 8.769-1.297 8.769l-0.9542 7.451-0.9832 6.661-1.284 7.294-1.697 5.318-1.634 5.678-1.259 5.384-1.411 6.022-0.813 3.659-5.101 0.346h-16.31l-10.2-0.346s-0.8182-9.323-0.8182-9.603c0-0.2799-0.7348-7.103-0.8048-7.383-0.07-0.2799-0.1749-6.613-0.1749-6.613l-0.14-2.869-0.8048-9.272-0.6298-8.817-0.035-8.362 0.035-4.409-0.07-6.928 0.07-5.248 0.035-3.954-0.105-6.193 0.2099-7.033-0.07-6.928-0.07-3.744 0.0205-3.85z" style="fill:#f00;stroke-width:.7559" />
@@ -150,8 +150,8 @@
                     <div class="body_part_form_group">
                         <label for="textinput"> Short damage description </label>
                         <div>
-                            <input id="textinput" name="textinput" type="text" placeholder="">
-
+                            <input id="textinput" name="textinput" type="text" required>
+                            <div id="textinput_tooltip" class="tooltip" style="display: none;">Pole wymagane !</div>
                         </div>
                     </div>
 
@@ -248,8 +248,8 @@
 
             // Zbieranie opisów (descriptions)
             const descriptions = Object.entries(body_part_data)
-                .map(([body_part, data]) => `${body_part}: Description - ${data.description}, Comment - ${data.comment}`)
-                .join("\n");
+                .map(([body_part, data]) => `» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')}   Description - ${data.description}   Comment - ${data.comment}`)
+                .join('\n');
 
             // Połączenie danych pacjenta, SVG i opisów
             const form_data = {
@@ -303,22 +303,19 @@
     <script>
         const body_part_data = {};
 
-        // Dodanie nasłuchiwania na kliknięcie do wszystkich elementów 'path'
         document.querySelectorAll("path").forEach(path => {
             path.addEventListener("click", body_part_clicked);
         });
 
         function body_part_clicked(event) {
             const path_element = event.currentTarget;
-            const body_part = path_element.dataset.body_part; // Pobranie wartości 'data-body-part'
+            const body_part = path_element.dataset.bodyPart; 
 
             const is_already_highlighted = path_element.classList.contains("selected");
 
-            // Wyświetlenie formularza
             document.getElementById('body_part_form').style.display = "block";
             document.getElementById('form_legend').innerText = `Details for ${body_part.replaceAll('_', ' ')}`;
 
-            // Pobieranie istniejących danych, jeśli element był wcześniej podświetlony
             const existing_data = body_part_data[body_part] || { description: '', comment: '' };
             document.getElementById('textinput').value = existing_data.description;
             document.getElementById('textarea').value = existing_data.comment;
@@ -327,11 +324,21 @@
             document.getElementById('body_part_form_group_ok_button').onclick = function (e) {
                 e.preventDefault();
 
+                const tooltip = document.getElementById('textinput_tooltip');
                 // Zapisujemy dane
                 body_part_data[body_part] = {
                     description: document.getElementById('textinput').value,
                     comment: document.getElementById('textarea').value,
                 };
+
+                if (body_part_data[body_part].description === '') {
+                    document.getElementById('textinput').focus();
+                    tooltip.style.display = 'block';
+                    return;
+                }
+                else {
+                    tooltip.style.display = 'none';
+                }
 
                 // Podświetlenie elementu
                 path_element.style.transition = "opacity 0.3s";
@@ -360,10 +367,13 @@
 
                 // Zamknięcie formularza
                 document.getElementById('body_part_form').style.display = "none";
+                document.getElementById('textinput_tooltip').style.display = 'none';
             };
 
             event.stopPropagation();
         }
+    
+
 
     </script>
 </body>

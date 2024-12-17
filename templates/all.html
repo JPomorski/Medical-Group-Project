@@ -5,71 +5,125 @@
     <title>All Patient Forms Page</title>
     <link rel="stylesheet" href="../static/css/styles.css">
     <link rel="icon" href="../static/images/logo.png" />
-
 </head>
 <body>
-<h2>All Patient Forms:</h2>
-<div class="top_right_buttons">
-    <form action="/register" class="custom_form">
-        <input type="submit" value="ADD PATIENT">
-    </form>
-</div>
-<ul>
-    {% for patient in patients %}
+    <h2>All Patient Forms:</h2>
+    <div class="top_right_buttons">
+        <form action="/register" class="custom_form">
+            <input type="submit" value="ADD PATIENT">
+        </form>
+    </div>
+    <ul>
+        {% for patient in patients %}
         <li>
-            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}')">
+            <button onclick="show_modal('{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}', '{{ patient.descriptions }}', '{{ patient.svg_content }}')">
                 {{ patient.name }} {{ patient.surname }}
             </button>
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
 
-
-
-<!-- Modalne okienko -->
-<div id="patient_modal" class="modal">
-    <div class="modal_content">
-        <span class="close" onclick="close_modal()">&times;</span>
-        <h2>Patient Details</h2>
-        <p><strong>Name:</strong> <span id="modal_name"></span></p>
-        <p><strong>Surname:</strong> <span id="modal_surname"></span></p>
-        <p><strong>Age:</strong> <span id="modal_age"></span></p>
-        <p><strong>Gender:</strong> <span id="modal_gender"></span></p>
-        <p><strong>Blood Type:</strong> <span id="modal_blood_type"></span></p>
-        <p><strong>Allergies:</strong> <span id="modal_allergies"></span></p>
-        <p><strong>Diseases:</strong> <span id="modal_diseases"></span></p>
-        <p><strong>On medication:</strong> <span id="modal_on_medication"></span></p>
+    <!-- Modalne okienko do wyświetlania danych pacjenta -->
+    <div id="patient_modal" class="modal">
+        <div class="modal_content">
+            <span class="close" onclick="close_modal()">&times;</span>
+            <h2>Patient Details</h2>
+            <p><strong>Name:</strong> <span id="modal_name"></span></p>
+            <p><strong>Surname:</strong> <span id="modal_surname"></span></p>
+            <p><strong>Age:</strong> <span id="modal_age"></span></p>
+            <p><strong>Gender:</strong> <span id="modal_gender"></span></p>
+            <p><strong>Blood Type:</strong> <span id="modal_blood_type"></span></p>
+            <p><strong>Allergies:</strong> <span id="modal_allergies"></span></p>
+            <p><strong>Diseases:</strong> <span id="modal_diseases"></span></p>
+            <p><strong>On medication:</strong> <span id="modal_on_medication"></span></p>
+            <p><strong>Descriptions:</strong> <span id="modal_descriptions"></span></p>
+            <p><strong>Quick view:</strong> <span id="modal_svg_content" onclick="show_svg_zoom()"></span></p>
+        </div>
     </div>
-</div>
 
-<script>
-    // Funkcja do pokazywania modala z danymi pacjenta
-    function show_modal(name, surname, age, gender, blood_type, allergies, diseases, on_medication) {
-        document.getElementById('modal_name').innerText = name;
-        document.getElementById('modal_surname').innerText = surname;
-        document.getElementById('modal_age').innerText = age;
-        document.getElementById('modal_gender').innerText = gender;
-        document.getElementById('modal_blood_type').innerText = blood_type;
-        document.getElementById('modal_allergies').innerText = allergies;
-        document.getElementById('modal_diseases').innerText = diseases;
-        document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
+    <!-- Modal z powiększonym obrazkiem -->
+    <div id="modal_image_view" class="modal" style="display:none">
+        <div class="modal_content" id="modal_image_content">
+            <span class="close" onclick="close_image_modal()">&times;</span>
+            <img id="modal_image" src="" alt="Expanded Image">
+        </div>
+    </div>
 
-        // Pokazanie modala
-        document.getElementById('patient_modal').style.display = 'block';
-    }
+    <script>
+        function show_modal(name, surname, age, gender, blood_type, allergies, diseases, on_medication, descriptions, svg_content) {
+            document.getElementById('modal_name').innerText = name;
+            document.getElementById('modal_surname').innerText = surname;
+            document.getElementById('modal_age').innerText = age;
+            document.getElementById('modal_gender').innerText = gender;
+            document.getElementById('modal_blood_type').innerText = blood_type;
+            document.getElementById('modal_allergies').innerText = allergies;
+            document.getElementById('modal_diseases').innerText = diseases;
+            document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
+            document.getElementById('modal_descriptions').innerText = descriptions;
+            document.getElementById('modal_svg_content').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" preserveAspectRatio="none">
+                                                                      <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
+                                                                      <g id="svg_transform" transform="scale(0.1634)">
+                                                                      ${svg_content}
+                                                                      </g>
+                                                                      </svg>`;
 
-    // Funkcja do zamykania modala
-    function close_modal() {
-        document.getElementById('patient_modal').style.display = 'none';
-    }
-
-    // Zamknij modal, jeśli kliknięto poza nim
-    window.onclick = function(event) {
-        const modal = document.getElementById('patient_modal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
+            document.getElementById('patient_modal').style.display = 'block';
         }
-    }
-</script>
+
+        function close_modal() {
+            document.getElementById('patient_modal').style.display = 'none';
+        }
+
+        function close_image_modal() {
+            document.getElementById('modal_image_view').style.display = 'none';
+        }
+
+        function show_svg_zoom() {
+            const svg_element = document.getElementById('modal_svg_content').querySelector('svg');
+
+            if (svg_element) {
+                const svg_copy = svg_element.cloneNode(true);
+
+                svg_copy.setAttribute('width', '400');
+                svg_copy.setAttribute('height', '400');
+
+                const image_element = svg_copy.querySelector('image');
+                if (image_element) {
+                    image_element.setAttribute('width', '400');
+                    image_element.setAttribute('height', '400');
+                }
+
+                const g_element = svg_copy.querySelector('g');
+                if (g_element) {
+                    g_element.setAttribute('transform', 'scale(0.6536)');
+                }
+
+                const modal_image_view = document.getElementById('modal_image_view');
+                const modal_content = document.getElementById('modal_image_content');
+
+                modal_content.innerHTML = ''; 
+                modal_content.appendChild(svg_copy); 
+
+                modal_image_view.style.display = 'flex';
+            } else {
+                console.error('Nie znaleziono elementu SVG w modal_svg_content');
+            }
+        }
+
+
+        window.onclick = function (event) {
+            const image_modal = document.getElementById('modal_image_view');
+            const patient_modal = document.getElementById('patient_modal');
+
+            if (event.target === image_modal) {
+                image_modal.style.display = 'none';
+                patient_modal.style.display = 'block';
+            } else if (event.target === patient_modal) {
+                patient_modal.style.display = 'none';
+            }
+        };
+
+
+    </script>
 </body>
 </html>

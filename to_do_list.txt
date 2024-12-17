@@ -1,0 +1,4 @@
+-Zmieniæ tak widok modal info i modal zoom, ¿eby nie da³o siê ich scrollowaæ
+-Eksport do pdfa, i do wydruku
+-Wygl¹d ogólny (na koniec) 
+-Zmieniæ age input type, bo nie mo¿e byæ text (ewetualnie dodaæ walidacjê inputu, ¿eby to by³a liczba, a nie sprzedam opla)

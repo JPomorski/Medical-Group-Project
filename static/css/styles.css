@@ -150,21 +150,19 @@ h2 {
 
 .container {
     display: flex;
-    justify-content: space-between; /* Elementy rozstawione na boki */
-    align-items: flex-start; /* Wyrównanie elementów do góry */
-    height: 100vh; /* Wysokość na cały ekran */
+    justify-content: space-between; 
+    align-items: flex-start; 
+    height: 100vh;
     padding: 20px;
-    box-sizing: border-box; /* Włączenie paddingu do kalkulacji szerokości */
+    box-sizing: border-box; 
 }
 
 .left {
-    width: 60%; /* 48% szerokości, aby zostawić odstęp */
-
-    padding: 10px;
+    width: 60%; 
 }
 
 .right {
-    width: 80%; /* 48% szerokości, aby zostawić odstęp */
+    width: 80%; 
     border-radius: 10px;
     background-color: #dcdcdc;
     padding: 10px;
@@ -355,8 +353,6 @@ path {
 }
 
 
-
-
 .top_right_buttons {
     position: absolute;
     top: 10px;
@@ -402,3 +398,70 @@ path {
         .top_right_buttons input[type="submit"]:hover {
             background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
         }
+
+#textarea{
+    resize: none;
+/*    overflow: hidden;*/
+      width: 100%;
+}
+
+.tooltip {
+    position: absolute;
+    top: 20%;
+   right: 10%;
+   /* transform: translateY(-50%);*/
+    background-color: #f44336; /* Czerwony kolor tła */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#modal_svg_content svg{
+    width: 100px; 
+    height: 100px; 
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    background-image: url("/static/images/human_body_model.jpg")
+}
+
+
+/* Styl dla modalu powiększonego obrazu */
+#modal_image_view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Przyciemnione tło modalu */
+    z-index: 9999;
+    display: flex; /* Umożliwia centrowanie */
+    justify-content: center;
+    align-items: center;
+}
+
+#modal_image_content {
+    position: relative;
+    width: 420px; 
+    height: 420px; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+   
+
+
+
+
+

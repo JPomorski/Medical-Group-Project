@@ -19,9 +19,9 @@ class Patient(db.Model):
     allergies = db.Column(db.String(100))
     diseases = db.Column(db.String(100))
     on_medication = db.Column(db.Boolean, default=False)
-    svg_content = db.Column(db.Text, nullable=False)  # Przechowuje zawartość SVG
-    descriptions = db.Column(db.Text, nullable=True)  # Pole na opisy
-    timestamp = db.Column(db.DateTime, server_default=db.func.now())  # Data zapisu
+    svg_content = db.Column(db.Text, nullable=False)  
+    descriptions = db.Column(db.Text, nullable=True)  
+    timestamp = db.Column(db.DateTime, server_default=db.func.now())  
 
 # class SVGRecord(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -36,7 +36,6 @@ class PatientRegistration(Resource):
     def post(self):
         data = request.json
 
-        # Pobieranie danych rejestracyjnych pacjenta
         name = data.get('name')
         surname = data.get('surname')
         age = data.get('age')
@@ -45,8 +44,6 @@ class PatientRegistration(Resource):
         allergies = data.get('allergies')
         diseases = data.get('diseases')
         on_medication = data.get('on_medication', '').lower() == 'yes'
-
-        # Pobieranie danych SVG i opisów
         svg_content = data.get('svg_content')
         descriptions = data.get('descriptions')
 
@@ -64,8 +61,8 @@ class PatientRegistration(Resource):
             allergies=allergies,
             diseases=diseases,
             on_medication=on_medication,
-            svg_content=svg_content,  # Zapis SVG
-            descriptions=descriptions  # Zapis opisów
+            svg_content=svg_content,  
+            descriptions=descriptions  
         )
 
         db.session.add(new_patient)

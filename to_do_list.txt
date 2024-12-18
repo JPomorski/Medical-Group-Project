@@ -1,3 +1,4 @@
+-Rejestracja tez jest scrollview (usun¹æ)
 -Zmieniæ tak widok modal info i modal zoom, ¿eby nie da³o siê ich scrollowaæ
 -Eksport do pdfa, i do wydruku
 -Wygl¹d ogólny (na koniec) 

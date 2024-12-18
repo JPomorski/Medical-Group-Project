@@ -79,14 +79,13 @@
             document.getElementById('modal_allergies').innerText = allergies;
             document.getElementById('modal_diseases').innerText = diseases;
             document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
-            document.getElementById('modal_descriptions').innerText = descriptions;
-            document.getElementById('modal_svg_content').innerHTML =
-                `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" preserveAspectRatio="none">
-                 <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
-                 <g id="svg_transform" transform="scale(0.1634)">
-                 ${svg_content}
-                 </g>
-                 </svg>`;
+            document.getElementById('modal_descriptions').innerText = descriptions.replaceAll(';', '\n');
+            document.getElementById('modal_svg_content').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" preserveAspectRatio="none">
+                                                                      <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
+                                                                      <g id="svg_transform" transform="scale(0.1634)">
+                                                                      ${svg_content}
+                                                                      </g>
+                                                                      </svg>`;
 
             document.getElementById('patient_modal').style.display = 'block';
         }
@@ -155,7 +154,9 @@
                     }
                 })
 
-                const result = await response.json();
+        function show_description(descriptions_data) {
+
+        }
 
                 if (response.ok) {
                     alert("Patient's data deleted successfully");

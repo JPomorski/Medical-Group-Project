@@ -151,7 +151,7 @@
                         <label for="textinput"> Short damage description </label>
                         <div>
                             <input id="textinput" name="textinput" type="text" required>
-                            <div id="textinput_tooltip" class="tooltip" style="display: none;">Pole wymagane !</div>
+                            <div id="textinput_tooltip" class="tooltip" style="display: none;"> Required field!</div>
                         </div>
                     </div>
 
@@ -175,7 +175,6 @@
     </div>
 
     <script>
-        // Funkcja do pokazywania/ukrywania pola tekstowego "Other"
         function toggle_other_field(select_id, text_field_id) {
             const select_element = document.getElementById(select_id);
             const text_field = document.getElementById(text_field_id);
@@ -184,15 +183,13 @@
                 text_field.style.display = 'block';
             } else {
                 text_field.style.display = 'none';
-                text_field.value = ''; // Resetuj wartość pola
+                text_field.value = ''; 
             }
         }
-        // Obsługa formularza rejestracji
-        // Obsługa formularza rejestracji
-        document.getElementById('register_form').addEventListener('submit', async function (event) {
-            event.preventDefault(); // Zapobiega domyślnej akcji submit (przeładowanie strony)
 
-            // Zbieranie danych pacjenta z formularza
+        document.getElementById('register_form').addEventListener('submit', async function (event) {
+            event.preventDefault(); 
+
             const name = document.getElementById('name').value;
             const surname = document.getElementById('surname').value;
             const age = document.getElementById('age').value;
@@ -202,19 +199,16 @@
             const diseases = document.getElementById('diseases').value;
             const on_medication = document.getElementById('on_medication').checked ? 'Yes' : 'No';
 
-            // Obsługa pola "Other" dla alergii
             const other_allergy_text = document.getElementById('other_allergy').value;
             const final_allergy = allergies === 'Other' && other_allergy_text.trim() !== ''
                 ? `${allergies}: ${other_allergy_text}`
                 : allergies;
 
-            // Obsługa pola "Other" dla chorób
             const other_disease_text = document.getElementById('other_disease').value;
             const final_disease = diseases === 'Other' && other_disease_text.trim() !== ''
                 ? `${diseases}: ${other_disease_text}`
                 : diseases;
 
-            // Tworzymy obiekt pacjenta do wysłania
             const patient_data = {
                 name,
                 surname,
@@ -226,40 +220,32 @@
                 on_medication
             };
 
-            // Zbieranie danych SVG (jeśli są)
             const svg_element = document.querySelector("svg");
             let svg_data = null;
 
             if (svg_element) {
-                // Tworzymy nowy SVG tylko z zaznaczonymi elementami
                 const new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 new_svg.setAttribute("width", svg_element.getAttribute("width"));
                 new_svg.setAttribute("height", svg_element.getAttribute("height"));
 
-                // Dodanie tylko zaznaczonych części do nowego SVG
                 document.querySelectorAll('.selected').forEach(el => {
                     const clone = el.cloneNode(true);
                     new_svg.appendChild(clone);
                 });
 
-                // Serializacja SVG
                 svg_data = new XMLSerializer().serializeToString(new_svg);
             }
 
-            // Zbieranie opisów (descriptions)
             const descriptions = Object.entries(body_part_data)
-                .map(([body_part, data]) => `» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')}   Description - ${data.description}   Comment - ${data.comment}`)
-                .join('\n');
+                .map(([body_part, data]) => `;» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')};Description - ${data.description};Comment - ${data.comment};`).join('');
 
-            // Połączenie danych pacjenta, SVG i opisów
             const form_data = {
                 ...patient_data,
-                svg_content: svg_data,   // Dodanie danych SVG
-                descriptions: descriptions // Dodanie danych opisów
+                svg_content: svg_data,   
+                descriptions: descriptions 
             };
 
             try {
-                // Wysyłanie danych pacjenta, SVG i opisów do backendu
                 const response = await fetch('/register', {
                     method: 'POST',
                     headers: {
@@ -274,20 +260,17 @@
                     document.getElementById('register_form').reset();
 
 
-                    // Ustawianie domyślnych wartości dla "Other" fields
-                    document.getElementById('allergies').value = 'None'; // Ustawienie wartości "None" dla alergii
-                    document.getElementById('other_allergy').value = ''; // Resetowanie tekstu alergii "Other"
-                    document.getElementById('diseases').value = 'None'; // Ustawienie wartości "None" dla chorób
-                    document.getElementById('other_disease').value = ''; // Resetowanie tekstu chorób "Other"
+                    document.getElementById('allergies').value = 'None'; 
+                    document.getElementById('other_allergy').value = ''; 
+                    document.getElementById('diseases').value = 'None';
+                    document.getElementById('other_disease').value = ''; 
 
-                    // Ukrycie pola "Other" po wysłaniu formularza, jeśli wybór nie jest "Other"
                     toggle_other_field('allergies', 'other_allergy');
                     toggle_other_field('diseases', 'other_disease');
 
-                    // Usuń tylko efekty podświetlenia, zachowując funkcjonalność hover
                     document.querySelectorAll(".selected").forEach(element => {
-                        element.classList.remove("selected"); // Usuwamy klasę `selected`
-                        element.style.opacity = ""; // Usuwamy inline-style, by hover działało poprawnie
+                        element.classList.remove("selected"); 
+                        element.style.opacity = ""; 
                     });
 
 
@@ -320,12 +303,10 @@
             document.getElementById('textinput').value = existing_data.description;
             document.getElementById('textarea').value = existing_data.comment;
 
-            // Obsługa przycisku OK
             document.getElementById('body_part_form_group_ok_button').onclick = function (e) {
                 e.preventDefault();
 
                 const tooltip = document.getElementById('textinput_tooltip');
-                // Zapisujemy dane
                 body_part_data[body_part] = {
                     description: document.getElementById('textinput').value,
                     comment: document.getElementById('textarea').value,
@@ -340,32 +321,25 @@
                     tooltip.style.display = 'none';
                 }
 
-                // Podświetlenie elementu
                 path_element.style.transition = "opacity 0.3s";
                 path_element.style.opacity = "1";
                 path_element.classList.add("selected");
 
-                // Zamykamy formularz
                 document.getElementById('body_part_form').style.display = "none";
             };
 
-            // Obsługa przycisku Cancel
             document.getElementById('body_part_form_group_cancel_button').onclick = function () {
-                // Jeśli element był wcześniej podświetlony, usuwamy dane
                 if (is_already_highlighted) {
                     delete body_part_data[body_part];
                 }
 
-                // Wyczyszczenie pól w formularzu
                 document.getElementById('textinput').value = '';
                 document.getElementById('textarea').value = '';
 
-                // Odznaczenie elementu
                 path_element.style.transition = "opacity 0.3s";
                 path_element.style.opacity = "";
                 path_element.classList.remove("selected");
 
-                // Zamknięcie formularza
                 document.getElementById('body_part_form').style.display = "none";
                 document.getElementById('textinput_tooltip').style.display = 'none';
             };

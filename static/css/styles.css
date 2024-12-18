@@ -150,19 +150,19 @@ h2 {
 
 .container {
     display: flex;
-    justify-content: space-between; 
-    align-items: flex-start; 
+    justify-content: space-between;
+    align-items: flex-start;
     height: 100vh;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .left {
-    width: 60%; 
+    width: 60%;
 }
 
 .right {
-    width: 80%; 
+    width: 80%;
     border-radius: 10px;
     background-color: #dcdcdc;
     padding: 10px;
@@ -272,6 +272,20 @@ button {
         background-color: #45a049; /* Ciemniejszy odcień zielonego przy najechaniu */
     }
 
+.delete-button {
+    background-color: #dd0000;
+}
+.delete-button:hover {
+    background-color: #a80000;
+}
+
+.cancel-button {
+    background-color: #888888;
+}
+.cancel-button:hover {
+    background-color: #555555;
+}
+
 /* Stylizacja modalnego okienka */
 .modal {
     display: none; /* Ukryty domyślnie */
@@ -289,7 +303,10 @@ button {
 .modal_content {
     background-color: #f0f0f0; /* Jasno szary kolor modalnego okienka */
     color: black;
-    margin: 15% auto; /* Marginesy dla centrowania */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 20px;
     border: 1px solid #888; /* Obramowanie */
     width: 80%; /* Szerokość modalnego okienka */
@@ -303,11 +320,40 @@ button {
         margin-bottom: 15px;
     }
 
+.modal_content.wide {
+    max-width: 600px;
+}
+
+.button_container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.details_panel {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.modal_content h2 {
+    color: #333; /* Ciemniejszy odcień nagłówka */
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
     .modal_content p {
         color: #555; /* Szary tekst dla reszty */
         font-size: 16px;
         margin: 5px 0;
     }
+
+.modal_content p.warning {
+    color: #ab0023;
+    text-align: center;
+    font-weight: bold;
+}
 
 /* Stylizacja przycisku zamknięcia modala */
 .close {
@@ -420,8 +466,8 @@ path {
 }
 
 #modal_svg_content svg{
-    width: 100px; 
-    height: 100px; 
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -448,18 +494,18 @@ path {
 
 #modal_image_content {
     position: relative;
-    width: 420px; 
-    height: 420px; 
-    background-color: #fff; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    width: 420px;
+    height: 420px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
-   
+
 
 
 

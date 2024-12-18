@@ -77,6 +77,27 @@ class PatientRegistration(Resource):
         return jsonify({'message': message}), 200
 
 
+class PatientDeletion(Resource):
+    @staticmethod
+    def delete(patient_id):
+        try:
+            patient = db.session.get(Patient, patient_id)
+
+            if not patient:
+                return {'message': 'Patient not found'}, 404
+
+            db.session.delete(patient)
+            db.session.commit()
+
+            return {'message': 'Patient deleted successfully'}, 200
+
+        except Exception as e:
+            db.session.rollback()
+            return {'message': str(e)}, 500
+
+
+api.add_resource(PatientDeletion, '/delete/<int:patient_id>')
+
 # accident form panel
 @app.route('/', methods=['GET', 'POST'])
 def main():  # put application's code here
@@ -88,6 +109,10 @@ def register():  # put application's code here
     if request.method == 'POST':
         return PatientRegistration().post()
     return render_template('register.html')
+
+@app.route('/delete/<int:patient_id>', methods=['DELETE'])
+def delete(patient_id):
+    return PatientDeletion().delete(patient_id)
 
 # forms panel
 @app.route('/all')

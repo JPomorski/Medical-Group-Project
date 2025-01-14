@@ -75,6 +75,14 @@
                 <label for="on_medication">Is the patient on medication?</label>
                 <input type="checkbox" id="on_medication" name="on_medication"><br><br>
 
+                <label for="priority"> How dangerous is the case ?</label>
+                <select id="priority" name="priority">
+                    <option value="0"> Minor</option>
+                    <option value="1"> Serious</option>
+                    <option value="2"> Fatal </option>
+                    <option value="3"> For system to analize </option>
+                </select>
+
                 <div class="submit_container">
                     <input type="submit" value="Register">
                 </div>
@@ -208,6 +216,7 @@
             const final_disease = diseases === 'Other' && other_disease_text.trim() !== ''
                 ? `${diseases}: ${other_disease_text}`
                 : diseases;
+            const priority = document.getElementById('priority').value;
 
             const patient_data = {
                 name,
@@ -217,7 +226,8 @@
                 blood_type,
                 allergies: final_allergy,
                 diseases: final_disease,
-                on_medication
+                on_medication,
+                priority
             };
 
             const svg_element = document.querySelector("svg");
@@ -237,7 +247,7 @@
             }
 
             const descriptions = Object.entries(body_part_data)
-                .map(([body_part, data]) => `;» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')};Description - ${data.description};Comment - ${data.comment};`).join('');
+                .map(([body_part, data]) => `;» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')};Description: ${data.description};Comment:  ${data.comment};`).join('');
 
             const form_data = {
                 ...patient_data,

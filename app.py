@@ -22,6 +22,7 @@ class Patient(db.Model):
     svg_content = db.Column(db.Text, nullable=False)  
     descriptions = db.Column(db.Text, nullable=True)  
     timestamp = db.Column(db.DateTime, server_default=db.func.now())  
+    priority = db.Column(db.Integer, nullable=False, default=0)
 
 # class SVGRecord(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +47,7 @@ class PatientRegistration(Resource):
         on_medication = data.get('on_medication', '').lower() == 'yes'
         svg_content = data.get('svg_content')
         descriptions = data.get('descriptions')
+        priority = data.get('priority')
 
         # Walidacja wymaganych danych
         if not name or not surname or not age or not gender or not blood_type:
@@ -62,7 +64,8 @@ class PatientRegistration(Resource):
             diseases=diseases,
             on_medication=on_medication,
             svg_content=svg_content,  
-            descriptions=descriptions  
+            descriptions=descriptions,
+            priority=priority
         )
 
         db.session.add(new_patient)

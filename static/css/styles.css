@@ -273,9 +273,16 @@ button {
     font-size: 16px; /* Rozmiar czcionki */
 }
 
-    button:hover {
-        background-color: #45a049; /* Ciemniejszy odcień zielonego przy najechaniu */
-    }
+button:hover {
+    background-color: #45a049; /* Ciemniejszy odcień zielonego przy najechaniu */
+}
+
+.edit-button {
+    background-color: #2194d7;
+}
+.edit-button:hover {
+    background-color: #2269af;
+}
 
 .delete-button {
     background-color: #dd0000;

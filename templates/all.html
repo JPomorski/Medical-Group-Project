@@ -41,7 +41,10 @@
                 <p><strong>Quick view:</strong> <span id="modal_svg_content" onclick="show_svg_zoom()"></span></p>
                 <p><strong>Priority:</strong> <span id="modal_priority"></span></p>
             </div>
-            <button class="delete-button" onclick="show_confirmation()">Delete</button>
+            <div class="button_container">
+                <button class="edit-button" onclick="">Edit ✏️</button>
+                <button class="delete-button" onclick="show_confirmation()">Delete 🗑️</button>
+            </div>
         </div>
     </div>
 
@@ -156,9 +159,7 @@
                     }
                 })
 
-        function show_description(descriptions_data) {
-
-        }
+                const result = await response.json();
 
                 if (response.ok) {
                     alert("Patient's data deleted successfully");

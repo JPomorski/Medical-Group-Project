@@ -164,6 +164,10 @@ h2 {
     width: 60%;
 }
 
+.left.edit {
+    width: 100%;
+}
+
 .right {
     right: 15%; 
     width: 80%;
@@ -261,6 +265,10 @@ li {
     margin-top: 20px; /* Odstęp górny */
 }
 
+.submit_container.edit {
+    gap: 16px;
+}
+
 /* Stylizacja przycisku pacjenta */
 button {
     width: 100%; /* Szerokość 100% kontenera */
@@ -303,6 +311,8 @@ button:hover {
     display: none; /* Ukryty domyślnie */
     position: fixed; /* Pozycjonowanie */
     z-index: 1; /* Na wierzchu */
+    justify-content: center;
+    align-items: center;
     left: 0;
     top: 0;
     width: 100%; /* Szerokość 100% */

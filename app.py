@@ -101,6 +101,52 @@ class PatientDeletion(Resource):
 
 api.add_resource(PatientDeletion, '/delete/<int:patient_id>')
 
+
+class PatientEdition(Resource):
+    @staticmethod
+    def get(patient_id):
+        patient = db.session.get(Patient, patient_id)
+
+        if not patient:
+            return jsonify({'message': 'Patient not found'}), 404
+
+        patient_data = {
+            'name': patient.name,
+            'surname': patient.surname,
+            'age': patient.age,
+            'gender': patient.gender,
+            'blood_type': patient.blood_type,
+            'allergies': patient.allergies,
+            'diseases': patient.diseases,
+            'on_medication': 'Yes' if patient.on_medication else 'No',
+            'priority': patient.priority
+        }
+        return jsonify(patient_data), 200
+
+
+class PatientUpdate(Resource):
+    @staticmethod
+    def put(patient_id):
+        data = request.json
+        patient = db.session.get(Patient, patient_id)
+
+        if not patient:
+            return jsonify({'message': 'Patient not found'}), 404
+
+        patient.name = data.get('name')
+        patient.surname = data.get('surname')
+        patient.age = data.get('age')
+        patient.gender = data.get('gender')
+        patient.blood_type = data.get('blood_type')
+        patient.allergies = data.get('allergies')
+        patient.diseases = data.get('diseases')
+        patient.on_medication = data.get('on_medication', '').lower() == 'yes'
+        patient.priority = data.get('priority')
+
+        db.session.commit()
+
+        return jsonify({'message': "Patient's data updated successfully"}), 200
+
 # accident form panel
 @app.route('/', methods=['GET', 'POST'])
 def main():  # put application's code here
@@ -116,6 +162,14 @@ def register():  # put application's code here
 @app.route('/delete/<int:patient_id>', methods=['DELETE'])
 def delete(patient_id):
     return PatientDeletion().delete(patient_id)
+
+@app.route('/edit/<int:patient_id>', methods=['GET'])
+def edit(patient_id):
+    return PatientEdition().get(patient_id)
+
+@app.route('/update/<int:patient_id>', methods=['PUT'])
+def update(patient_id):
+    return PatientUpdate().put(patient_id)
 
 # forms panel
 @app.route('/all')

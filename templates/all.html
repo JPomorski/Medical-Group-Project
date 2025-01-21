@@ -251,6 +251,19 @@
             }
         }
 
+        function enable_other_field(text_field_id) {
+            const text_field = document.getElementById(text_field_id);
+
+            text_field.style.display = 'block';
+        }
+
+        function disable_other_field(text_field_id) {
+            const text_field = document.getElementById(text_field_id);
+
+            text_field.style.display = 'none';
+            text_field.value = '';
+        }
+
         document.getElementById('edit_form').addEventListener('submit', async function (event) {
             event.preventDefault();
 
@@ -504,9 +517,6 @@
         }
 
         async function edit_patient(patient_id) {
-            document.getElementById('edit_container').style.display = 'flex';
-            document.getElementById('edit_container').style.zIndex = '1';
-
             try {
                 const response = await fetch(`/edit/${patient_id}`);
                 const patient = await response.json();
@@ -525,6 +535,7 @@
                         document.getElementById('other_allergy').value = allergy_details[1];
                     } else {
                         document.getElementById('allergies').value = patient.allergies;
+                        disable_other_field('other_allergy');
                     }
 
                     if (patient.diseases.startsWith('Other:')) {
@@ -534,6 +545,7 @@
                         document.getElementById('other_disease').value = disease_details[1];
                     } else {
                         document.getElementById('diseases').value = patient.diseases;
+                        disable_other_field('other_disease');
                     }
 
                     document.getElementById('on_medication').checked = patient.on_medication === 'Yes';
@@ -544,6 +556,9 @@
             } catch (error) {
                 console.error('Error:', error);
             }
+
+            document.getElementById('edit_container').style.display = 'flex';
+            document.getElementById('edit_container').style.zIndex = '1';
         }
 
         window.onclick = function (event) {

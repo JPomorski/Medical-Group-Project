@@ -418,7 +418,7 @@
             document.getElementById('modal_blood_type').innerText = blood_type;
             document.getElementById('modal_allergies').innerText = allergies;
             document.getElementById('modal_diseases').innerText = diseases;
-            document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
+            document.getElementById('modal_on_medication').innerText = (on_medication === 'True' || on_medication === 'true') ? 'Yes' : 'No';
             document.getElementById('modal_descriptions').innerText = descriptions.replace(/;/g, '\n');
             document.getElementById('modal_svg_content').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" preserveAspectRatio="none">
                                                                                   <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
@@ -517,14 +517,30 @@
                 const patient = await response.json();
 
                 if (response.ok) {
-                    // Wypełniamy formularz danymi pacjenta
                     document.getElementById('name').value = patient.name;
                     document.getElementById('surname').value = patient.surname;
                     document.getElementById('age').value = patient.age;
                     document.getElementById('gender').value = patient.gender;
                     document.getElementById('blood_type').value = patient.blood_type;
-                    document.getElementById('allergies').value = patient.allergies;
-                    document.getElementById('diseases').value = patient.diseases;
+
+                    if (patient.allergies.startsWith('Other:')) {
+                        const allergy_details = patient.allergies.split(': ');
+                        toggle_other_field('allergies', 'other_allergy');
+                        document.getElementById('allergies').value = allergy_details[0];
+                        document.getElementById('other_allergy').value = allergy_details[1];
+                    } else {
+                        document.getElementById('allergies').value = patient.allergies;
+                    }
+
+                    if (patient.diseases.startsWith('Other:')) {
+                        const disease_details = patient.diseases.split(': ');
+                        toggle_other_field('diseases', 'other_disease');
+                        document.getElementById('diseases').value = disease_details[0];
+                        document.getElementById('other_disease').value = disease_details[1];
+                    } else {
+                        document.getElementById('diseases').value = patient.diseases;
+                    }
+
                     document.getElementById('on_medication').checked = patient.on_medication === 'Yes';
                     document.getElementById('priority').value = patient.priority;
                 } else {

@@ -49,11 +49,9 @@ class PatientRegistration(Resource):
         descriptions = data.get('descriptions')
         priority = data.get('priority')
 
-        # Walidacja wymaganych danych
         if not name or not surname or not age or not gender or not blood_type:
             return jsonify({'message': 'Missing information'}), 400
 
-        # Tworzenie nowego pacjenta
         new_patient = Patient(
             name=name,
             surname=surname,
@@ -147,14 +145,13 @@ class PatientUpdate(Resource):
 
         return jsonify({'message': "Patient's data updated successfully"}), 200
 
-# accident form panel
 @app.route('/', methods=['GET', 'POST'])
-def main():  # put application's code here
+def main():  
     return render_template('main_site.html')
 
-# registration panel
+
 @app.route('/register', methods=['GET', 'POST'])
-def register():  # put application's code here
+def register():  
     if request.method == 'POST':
         return PatientRegistration().post()
     return render_template('register.html')
@@ -171,10 +168,10 @@ def edit(patient_id):
 def update(patient_id):
     return PatientUpdate().put(patient_id)
 
-# forms panel
+
 @app.route('/all')
-def all():  # put application's code here
-    patients = Patient.query.all()  # Pobranie wszystkich pacjentów z bazy danych
+def all():  
+    patients = Patient.query.all()  
     return render_template('all.html', patients=patients)
 
 api.add_resource(PatientRegistration, '/register')
@@ -185,13 +182,11 @@ def display_svg_with_bg(patient_id):
     if not patient or not patient.svg_content:
         return "SVG not found or patient has no SVG data", 404
 
-    # Dodanie obrazu tła do SVG
     svg_with_bg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="612" height="612" preserveAspectRatio="none">
         <image width="612" height="612" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
         {patient.svg_content}
     </svg>"""
 
-    # Przekazanie opisów do szablonu
     return render_template(
         'display_svg.html',
         svg_content=svg_with_bg,

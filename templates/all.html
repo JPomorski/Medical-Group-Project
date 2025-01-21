@@ -23,7 +23,6 @@
         {% endfor %}
     </ul>
 
-    <!-- Modalne okienko do wyświetlania danych pacjenta -->
     <div id="patient_modal" class="modal">
         <div class="modal_content">
             <span class="close" onclick="close_element('patient_modal')">&times;</span>
@@ -42,9 +41,9 @@
                 <p><strong>Priority:</strong> <span id="modal_priority"></span></p>
             </div>
             <div class="button_container">
-                <button class="edit-button" onclick="edit_patient(selected_patient)">Edit ✏️</button>
-                <button class="delete-button" onclick="show_confirmation()">Delete 🗑️</button>
-                <button class="pdf-button" onclick="generate_pdf()">Generate PDF 📄</button>
+                <button class="edit_button" onclick="edit_patient(selected_patient)">Edit ✏️</button>
+                <button class="delete_button" onclick="show_confirmation()">Delete 🗑️</button>
+                <button class="pdf_button" onclick="generate_pdf()">Generate PDF 📄</button>
             </div>
         </div>
     </div>
@@ -52,7 +51,7 @@
         <div class="modal_content wide">
             <embed id="pdf_preview" type="application/pdf" width="100%" height="600px">
             <div class="button_container">
-                <button class="cancel-button" onclick="close_element('pdf_preview_modal')">Close</button>
+                <button class="cancel_button" onclick="close_element('pdf_preview_modal')">Close</button>
             </div>
         </div>
     </div>
@@ -65,13 +64,12 @@
             <p class="warning">WARNING: this cannot be undone!</p>
             <br />
             <div class="button_container">
-                <button class="cancel-button" onclick="close_element('confirmation_panel')">Cancel</button>
-                <button class="delete-button" onclick="delete_patient(selected_patient)">Delete</button>
+                <button class="cancel_button" onclick="close_element('confirmation_panel')">Cancel</button>
+                <button class="delete_button" onclick="delete_patient(selected_patient)">Delete</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal z powiększonym obrazkiem -->
     <div id="modal_image_view" class="modal" style="display:none">
         <div class="modal_content" id="modal_image_content">
             <span class="close" onclick="close_image_modal()">&times;</span>
@@ -79,10 +77,9 @@
         </div>
     </div>
 
-    <!-- Formularz edycji -->
     <div id="edit_container" class="modal">
-        <div class="container edit">
-            <div class="left edit">
+        <div class="container_edit">
+            <div class="left_edit">
                 <form id="edit_form">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Name" required>
@@ -150,7 +147,7 @@
 
                     <div class="submit_container edit">
                         <input type="submit" value="Confirm">
-                        <button type="button" class="cancel-button" onclick="close_element('edit_container')">Cancel</button>
+                        <button type="button" class="cancel_button" onclick="close_element('edit_container')">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -239,7 +236,6 @@
         </div>
     </div>
 
-    <!-- Obsługa formularza edycji -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script>
@@ -338,7 +334,6 @@
         });
     </script>
 
-    <!-- Obsługa SVG -->
     <script>
         const body_part_data = {};
 
@@ -482,7 +477,7 @@
 
                 modal_image_view.style.display = 'block';
             } else {
-                console.error('Nie znaleziono elementu SVG w modal_svg_content');
+                console.error('Modal_svg_content not found!');
             }
         }
 
@@ -560,8 +555,7 @@
         async function generate_pdf() {
             const doc = new jspdf.jsPDF({ encoding: 'UTF-8' });
 
-            // Dane tekstowe
-            const details = [
+                         const details = [
                 `Name: ${document.getElementById('modal_name').innerText}`,
                 `Surname: ${document.getElementById('modal_surname').innerText}`,
                 `Age: ${document.getElementById('modal_age').innerText}`,
@@ -570,7 +564,6 @@
                 `Allergies: ${document.getElementById('modal_allergies').innerText}`,
                 `Diseases: ${document.getElementById('modal_diseases').innerText}`,
                 `On medication: ${document.getElementById('modal_on_medication').innerText}`,
-                // Rozdzielenie description na linie i dodanie wcięć
                 `Descriptions:\n${document.getElementById('modal_descriptions').innerText
                     .split(';')
                     .map(line => `${line.trim()}`)
@@ -578,62 +571,51 @@
                 `Priority: ${document.getElementById('modal_priority').innerText}`,
             ];
 
-            // Dodanie logo
-            const logoImgData = '/static/images/logo.png';
-            doc.addImage(logoImgData, 'PNG', 160, 10, 40, 40);
+            const logo_img_data = '/static/images/logo.png';
+            doc.addImage(logo_img_data, 'PNG', 160, 10, 40, 40);
 
-            let yPosition = 50; // Startowa pozycja na stronie
+            let y_position = 50; 
             doc.setFontSize(12);
-            doc.text('Patient Details', 10, yPosition);
-            yPosition += 10;
+            doc.text('Patient Details', 10, y_position);
+            y_position += 10;
 
             details.forEach((detail) => {
-                if (yPosition > 280) { // Gdy zbliżamy się do dolnej krawędzi strony
-                    addFooter(doc); // Dodanie stopki przed utworzeniem nowej strony
+                if (y_position > 280) {
+                    add_footer(doc);
                     doc.addPage();
-                    yPosition = 20; // Reset pozycji na nowej stronie
+                    y_position = 20;
                 }
 
-                // Dostosowanie odstępu dla descriptions, które mogą być wielolinijkowe
-                const lines = doc.splitTextToSize(detail, 190); // Podział na linie pasujące do szerokości strony
+                const lines = doc.splitTextToSize(detail, 190);
                 lines.forEach((line) => {
-                    doc.text(line, 10, yPosition);
-                    yPosition += 10;
-                    if (yPosition > 280) {
-                        addFooter(doc); // Dodanie stopki przed utworzeniem nowej strony
+                    doc.text(line, 10, y_position);
+                    y_position += 10;
+                    if (y_position > 280) {
+                        add_footer(doc);
                         doc.addPage();
-                        yPosition = 20;
+                        y_position = 20;
                     }
                 });
             });
 
-            addFooter(doc); // Dodanie stopki na ostatniej stronie
-
-            const pdfOutput = doc.output('datauristring');
-
-            // Ustawienie modalnego podglądu PDF
-            const modalPreview = document.getElementById('pdf_preview_modal');
+            addFooter(doc);  
+            const pdf_output = doc.output('datauristring');
+            const modal_preview = document.getElementById('pdf_preview_modal');
             const embed = document.getElementById('pdf_preview');
 
-            embed.src = pdfOutput;
-
-            // Pokazanie modala z podglądem
-            modalPreview.style.display = 'block';
+            embed.src = pdf_output;
+            modal_preview.style.display = 'block';
         }
 
-        // Funkcja do dodania stopki na stronie
-        function addFooter(doc) {
-            const pageHeight = doc.internal.pageSize.height; // Wysokość strony
-            const margin = 10; // Margines od dolnej krawędzi
-            const yFooterPosition = pageHeight - margin - 10;
+        function add_footer(doc) {
+            const page_height = doc.internal.pageSize.height;
+            const margin = 10; const y_footer_position = page_height - margin - 10;
 
-            // Rysowanie poziomej linii
             doc.setLineWidth(0.5);
-            doc.line(120, yFooterPosition, 200, yFooterPosition); // Linie od (x1, y1) do (x2, y2)
+            doc.line(120, y_footer_position, 200, y_footer_position); 
 
-            // Dodanie tekstu "Doctor's Signature"
             doc.setFontSize(10);
-            doc.text("Doctor's Signature", 160, yFooterPosition + 5);
+            doc.text("Doctor's Signature", 160, y_footer_position + 5);
         }
 
     </script>

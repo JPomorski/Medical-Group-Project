@@ -1,22 +1,20 @@
-/* Resetowanie marginesów i paddingów */
 body, h2, ul, form {
     margin: 0;
     padding: 0;
 }
 
-/* Ustawienia dla całego ciała dokumentu */
 body {
-    font-family: Arial, sans-serif; /* Czcionka */
-    background-color: #808080; /* Szare tło */
+    font-family: Arial, sans-serif; 
+    background-color: #808080; 
     display: flex;
-    flex-direction: column; /*Kolumnowe rozmieszczenie */
+    flex-direction: column; 
     align-items: center;
     justify-content: flex-start;
-    height: 100vh; /* Wysokość 100% widoku */
+    height: 100vh; 
 }
 
 .body_main {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/background_main.png'); /* Ustawienie tła oraz dodatkowego cienia */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/background_main.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -24,7 +22,7 @@ body {
 
 
 header {
-    background-color: rgba(255, 255, 255, 0.15); /* Kolor tła z efektem mgły */
+    background-color: rgba(255, 255, 255, 0.15); 
     width: 100%;
     height: 150px;
 }
@@ -35,10 +33,6 @@ header {
 }
 
 .header_container_main {
-    /*display: flex;
-    align-items: center;*/ /* Wyśrodkowanie elementów w pionie */
-    /*flex-direction: row;
-    justify-content: space-evenly;*/
     position: relative;
     margin-top: 12px;
 }
@@ -47,8 +41,8 @@ header {
 .header_container_main_2 {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Dopasowanie elementów do środka */
-    position: absolute; /* Umiesczenie bezględne */
+    align-items: center; 
+    position: absolute;  
     left: 10%;
     top: 2%;
 }
@@ -64,75 +58,54 @@ header {
     font-size: 42px;
     font-weight: 700;
     padding: 10px 0;
-    color: #ffffff; /* Biały kolor tekstu */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Cień dla tekstu */
+    color: #ffffff;  
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  
 }
 
 .header_shortcut_name_main {
     font-size: 16px;
-    font-weight: 600; /* Grubość czcionki */
+    font-weight: 600;  
     color: #ffffff;
     padding: 4px 8px;
 }
 
     .header_shortcut_name_main:hover {
-        transform: scale(1.1); /* Powiększenie przy najechaniu */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Większy cień przy najechaniu */
-        cursor: pointer; /* Zmiana kursora, żeby było wiadomo, że można kliknąć  */
+        transform: scale(1.1);  
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+        cursor: pointer;  
     }
 
 
-/*.loginButton {
-    width: 200px;*/ /* Szerokość 100% kontenera */
-/*padding: 10px;
-    background-color: #4CAF50;*/ /* Kolor tła przycisku */
-/*color: white;*/ /* Kolor tekstu */
-/*border: none;*/ /* Bez obramowania */
-/*border-radius: 5px;*/ /* Zaokrąglenie rogów */
-/*cursor: pointer;*/ /* Zmieniony kursor na wskaźnik */
-/*font-size: 16px;*/ /* Rozmiar czcionki */
-/*}*/
-/*.mainSiteBody::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);*/ /* Adjust color and opacity */
-/*z-index: 1;
-}*/
-
 .body_container_main {
-    background-color: #dcdcdc; /* Jasno szary */
-    padding: 20px; /* Padding wewnętrzny */
-    border-radius: 10px; /* Zaokrąglenie rogów */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
-    width: 100%; /* Szerokość 100% kontenera */
-    max-width: 400px; /* Maksymalna szerokość */
-    height: 100%; /* Wysokość 100% widoku */
-    max-height: 400px; /* Maksymalna wysokość */
+    background-color: #dcdcdc;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    width: 100%;  
+    max-width: 400px;  
+    height: 100%;  
+    max-height: 400px;  
     display: flex;
-    flex-direction: column; /* Ustawia elementy w kolumnie */
-    justify-content: space-around; /* Odsuwa elementy na równa odległość od końca i początku diva oraz od krawędzi */
+    flex-direction: column;  
+    justify-content: space-around;  
 }
 
 .body_button_main_register, body_button_main_databse {
-    width: 100%; /* Szerokość 100% kontenera */
+    width: 100%;  
     padding: 10px;
-    background-color: #4CAF50; /* Kolor tła przycisku */
-    color: white; /* Kolor tekstu */
-    border: none; /* Bez obramowania */
-    border-radius: 5px; /* Zaokrąglenie rogów */
-    cursor: pointer; /* Zmieniony kursor na wskaźnik */
-    font-size: 16px; /* Rozmiar czcionki */
+    background-color: #4CAF50;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
 }
 
 .footer_container_main {
     background-color: rgba(255, 255, 255, 0.15);
     width: 100%;
-    text-align: center; /* Rozmieszczenie tekstu w centrum */
-    position: fixed; /* Stała pozycja względem przeglądarki */
+    text-align: center;  
+    position: fixed;  
     bottom: 0;
     left: 0;
 }
@@ -141,18 +114,18 @@ header {
     color: #FFF;
 }
 
-/* Stylizacja nagłówka */
+ 
 h2 {
     text-align: center;
     margin: 20px 0;
-    color: white; /* Kolor nagłówka */
+    color: white;  
 }
 
 .container {
     display: flex;
-    justify-content: center; /* Wyśrodkowanie poziome całej zawartości */
-    align-items: center; /* Wyśrodkowanie pionowe całej zawartości */
-    flex-direction: row; /* Utrzymanie układu obok siebie */
+    justify-content: center;  
+    align-items: center;  
+    flex-direction: row;  
     height: 90vh;
     padding: 20px;
     box-sizing: border-box;
@@ -180,164 +153,164 @@ h2 {
 
 
 
-/* Stylizacja formularza */
+ 
 form {
-    background-color: #dcdcdc; /* Jasno szary */
-    padding: 20px; /* Padding wewnętrzny */
-    border-radius: 10px; /* Zaokrąglenie rogów */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień */
-    width: 100%; /* Szerokość 100% kontenera */
-    max-width: 400px; /* Maksymalna szerokość */
+    background-color: #dcdcdc;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    width: 100%;  
+    max-width: 400px;  
 }
 
 .custom_form {
-    margin: 0; /* Usuń margines */
-    background: none; /* Brak tła */
-    padding: 0; /* Usuń odstępy */
-    border: none; /* Usuń obramowanie */
+    margin: 0;  
+    background: none;  
+    padding: 0;  
+    border: none;  
 }
 
 
-/* Elementy formularza */
+ 
 label {
-    display: block; /* Blokowy styl dla etykiet */
-    margin: 10px 0 0px; /* Odstępy */
+    display: block;  
+    margin: 10px 0 0px;  
     font-size: small;
     color: #575555;
 }
 
 input[type="text"] {
-    width: 100%; /* Szerokość 100% */
-    padding-bottom: 5px; /* Padding wewnętrzny */
-    padding-top: 5px; /* Padding wewnętrzny */
-    margin-bottom: 0px; /* Odstęp dolny */
-    border: 1px solid #ccc; /* Obramowanie */
-    border-radius: 5px; /* Zaokrąglenie rogów */
+    width: 100%;  
+    padding-bottom: 5px;  
+    padding-top: 5px;  
+    margin-bottom: 0px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
 }
 
     input[type="text"]::placeholder {
-        color: #000000; /* Change this to your desired color */
-        opacity: 1; /* Optional: Set the opacity if you want to adjust the transparency */
+        color: #000000;  
+        opacity: 1;  
     }
 
 select {
-    width: 102.5%; /* Szerokość 100% */
-    padding-bottom: 5px; /* Padding wewnętrzny */
-    padding-top: 5px; /* Padding wewnętrzny */
-    margin-bottom: 0px; /* Odstęp dolny */
-    border: 1px solid #ccc; /* Obramowanie */
-    border-radius: 5px; /* Zaokrąglenie rogów */
+    width: 102.5%;  
+    padding-bottom: 5px;  
+    padding-top: 5px;  
+    margin-bottom: 0px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
 }
 
-/* Stylizacja przycisku do dodawania pacjenta */
+ 
 input[type="submit"] {
     padding: 10px;
-    background-color: #007BFF; /* Kolor tła przycisku */
-    color: white; /* Kolor tekstu */
-    border: none; /* Bez obramowania */
-    border-radius: 5px; /* Zaokrąglenie rogów */
-    cursor: pointer; /* Zmieniony kursor na wskaźnik */
-    font-size: 16px; /* Rozmiar czcionki */
+    background-color: #007BFF;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
     width: 100%;
 }
 
     input[type="submit"]:hover {
-        background-color: #0056b3; /* Ciemniejszy odcień niebieskiego przy najechaniu */
+        background-color: #0056b3;  
     }
 
-/* Lista pacjentów */
+ 
 ul {
-    list-style-type: none; /* Usunięcie punktów z listy */
+    list-style-type: none;  
     padding: 0;
-    width: 100%; /* Szerokość 100% */
-    max-width: 500px; /* Maksymalna szerokość listy */
+    width: 100%;  
+    max-width: 500px;  
 }
 
-/* Elementy listy */
+ 
 li {
-    margin: 10px 0; /* Odstęp pomiędzy elementami listy */
+    margin: 10px 0;  
 }
 
-/* Stylizacja kontenera dla przycisku */
+ 
 .submit_container {
-    display: flex; /* Umożliwia elastyczne rozmieszczenie */
-    justify-content: center; /* Wyśrodkowanie poziome */
-    margin-top: 20px; /* Odstęp górny */
+    display: flex;  
+    justify-content: center;  
+    margin-top: 20px;  
 }
 
 .submit_container.edit {
     gap: 16px;
 }
 
-/* Stylizacja przycisku pacjenta */
+ 
 button {
-    width: 100%; /* Szerokość 100% kontenera */
+    width: 100%;  
     padding: 10px;
-    background-color: #4CAF50; /* Kolor tła przycisku */
-    color: white; /* Kolor tekstu */
-    border: none; /* Bez obramowania */
-    border-radius: 5px; /* Zaokrąglenie rogów */
-    cursor: pointer; /* Zmieniony kursor na wskaźnik */
-    font-size: 16px; /* Rozmiar czcionki */
+    background-color: #4CAF50;  
+    color: white;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
 }
 
 button:hover {
-    background-color: #45a049; /* Ciemniejszy odcień zielonego przy najechaniu */
+    background-color: #45a049;  
 }
 
-.edit-button {
+.edit_button {
     background-color: #2194d7;
 }
-.edit-button:hover {
+.edit_button:hover {
     background-color: #2269af;
 }
 
-.delete-button {
+.delete_button {
     background-color: #dd0000;
 }
-.delete-button:hover {
+.delete_button:hover {
     background-color: #a80000;
 }
 
-.cancel-button {
+.cancel_button {
     background-color: #888888;
 }
-.cancel-button:hover {
+.cancel_button:hover {
     background-color: #555555;
 }
 
-/* Stylizacja modalnego okienka */
+ 
 .modal {
-    display: none; /* Ukryty domyślnie */
-    position: fixed; /* Pozycjonowanie */
-    z-index: 1; /* Na wierzchu */
+    display: none;  
+    position: fixed;  
+    z-index: 1;  
     justify-content: center;
     align-items: center;
     left: 0;
     top: 0;
-    width: 100%; /* Szerokość 100% */
-    height: 100%; /* Wysokość 100% */
-    overflow: auto; /* Przewijanie, jeśli potrzebne */
-    background-color: rgba(0, 0, 0, 0.7); /* Półprzezroczysty czarny tło */
+    width: 100%;  
+    height: 100%;  
+    overflow: auto;  
+    background-color: rgba(0, 0, 0, 0.7);  
 }
 
-/* Stylizacja treści modalnego okienka */
+ 
 .modal_content {
-    background-color: #f0f0f0; /* Jasno szary kolor modalnego okienka */
+    background-color: #f0f0f0;  
     color: black;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    border: 1px solid #888; /* Obramowanie */
-    width: 80%; /* Szerokość modalnego okienka */
-    max-width: 400px; /* Maksymalna szerokość */
-    border-radius: 10px; /* Zaokrąglenie rogów */
+    border: 1px solid #888;  
+    width: 80%; 
+    max-width: 400px; 
+    border-radius: 10px; 
 }
 
     .modal_content h2 {
-        color: #333; /* Ciemniejszy odcień nagłówka */
+        color: #333; 
         font-size: 24px;
         margin-bottom: 15px;
     }
@@ -360,13 +333,13 @@ button:hover {
 }
 
 .modal_content h2 {
-    color: #333; /* Ciemniejszy odcień nagłówka */
+    color: #333; 
     font-size: 24px;
     margin-bottom: 15px;
 }
 
     .modal_content p {
-        color: #555; /* Szary tekst dla reszty */
+        color: #555; 
         font-size: 16px;
         margin: 5px 0;
     }
@@ -377,24 +350,23 @@ button:hover {
     font-weight: bold;
 }
 
-/* Stylizacja przycisku zamknięcia modala */
 .close {
-    color: #aaa; /* Kolor przycisku zamknięcia */
-    float: right; /* W prawo */
-    font-size: 28px; /* Rozmiar czcionki */
-    font-weight: bold; /* Pogrubienie */
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold; 
 }
 
     .close:hover,
     .close:focus {
-        color: black; /* Zmiana koloru przy najechaniu */
-        text-decoration: none; /* Bez podkreślenia */
-        cursor: pointer; /* Zmieniony kursor na wskaźnik */
+        color: black; 
+        text-decoration: none; 
+        cursor: pointer; 
     }
 
 
 path {
-    opacity: 0; /* Zmiana na przejrzyste */
+    opacity: 0; 
 }
 
     path:hover {
@@ -426,14 +398,14 @@ path {
     top: 10px;
     right: 10px;
     display: flex;
-    flex-direction: column; /* Jeden przycisk pod drugim */
-    gap: 10px; /* Odstęp między przyciskami */
+    flex-direction: column; 
+    gap: 10px; 
 }
 
     .top_right_buttons input[type="submit"] {
         padding: 5px 10px;
         font-size: 14px;
-        background-color: #8049e4; /* Niebieski kolor */
+        background-color: #8049e4; 
         color: white;
         border: none;
         border-radius: 5px;
@@ -441,7 +413,7 @@ path {
     }
 
         .top_right_buttons input[type="submit"]:hover {
-            background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
+            background-color: #5c35a3; 
         }
 
 .top_right_buttons {
@@ -449,14 +421,14 @@ path {
     top: 10px;
     right: 10px;
     display: flex;
-    flex-direction: column; /* Jeden przycisk pod drugim */
-    gap: 10px; /* Odstęp między przyciskami */
+    flex-direction: column;
+    gap: 10px; 
 }
 
     .top_right_buttons input[type="submit"] {
         padding: 5px 10px;
         font-size: 14px;
-        background-color: #8049e4; /* Niebieski kolor */
+        background-color: #8049e4; 
         color: white;
         border: none;
         border-radius: 5px;
@@ -464,12 +436,11 @@ path {
     }
 
         .top_right_buttons input[type="submit"]:hover {
-            background-color: #5c35a3; /* Ciemniejszy odcień przy najechaniu */
+            background-color: #5c35a3; 
         }
 
 #textarea{
     resize: none;
-/*    overflow: hidden;*/
       width: 100%;
 }
 
@@ -477,8 +448,7 @@ path {
     position: absolute;
     top: 20%;
    right: 10%;
-   /* transform: translateY(-50%);*/
-    background-color: #f44336; /* Czerwony kolor tła */
+    background-color: #f44336; 
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -499,7 +469,7 @@ path {
 }
 
 
-/* Styl dla modalu powiększonego obrazu */
+
 #modal_image_view {
     display: none;
     position: fixed;
@@ -507,9 +477,9 @@ path {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7); /* Przyciemnione tło modalu */
+    background: rgba(0, 0, 0, 0.7); 
     z-index: 9999;
-    display: flex; /* Umożliwia centrowanie */
+    display: flex; 
     justify-content: center;
     align-items: center;
 }

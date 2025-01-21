@@ -1,5 +1,2 @@
--Eksport do pdfa, i do wydruku
 -Wygl¹d ogólny (na koniec) 
 -Zmieniæ age input type, bo nie mo¿e byæ text (ewetualnie dodaæ walidacjê inputu, ¿eby to by³a liczba, a nie sprzedam opla)
--edi view dla danych z bazy
--zamiast usuwac z bazy klienta, usuwaj z widoku zeby dane, zostawaly w bazie i byly sprawdzane pozniej, dodatkowa flaga czy cos

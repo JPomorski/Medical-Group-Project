@@ -44,15 +44,26 @@
             <div class="button_container">
                 <button class="edit-button" onclick="edit_patient(selected_patient)">Edit ✏️</button>
                 <button class="delete-button" onclick="show_confirmation()">Delete 🗑️</button>
+                <button class="pdf-button" onclick="generate_pdf()">Generate PDF 📄</button>
             </div>
         </div>
     </div>
+    <div id="pdf_preview_modal" class="modal" style="display:none;">
+        <div class="modal_content wide">
+            <embed id="pdf_preview" type="application/pdf" width="100%" height="600px">
+            <div class="button_container">
+                <button class="cancel-button" onclick="close_element('pdf_preview_modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+
 
     <div id="confirmation_panel" class="modal">
         <div class="modal_content wide">
             <h2>Do you want to delete the patient's data from the database?</h2>
             <p class="warning">WARNING: this cannot be undone!</p>
-            <br/>
+            <br />
             <div class="button_container">
                 <button class="cancel-button" onclick="close_element('confirmation_panel')">Cancel</button>
                 <button class="delete-button" onclick="delete_patient(selected_patient)">Delete</button>
@@ -68,7 +79,7 @@
         </div>
     </div>
 
-     <!-- Formularz edycji -->
+    <!-- Formularz edycji -->
     <div id="edit_container" class="modal">
         <div class="container edit">
             <div class="left edit">
@@ -229,6 +240,8 @@
     </div>
 
     <!-- Obsługa formularza edycji -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script>
         function toggle_other_field(select_id, text_field_id) {
             const select_element = document.getElementById(select_id);
@@ -320,7 +333,7 @@
                     alert('Failed to save data.');
                 }
             } catch (error) {
-               console.error('Error:', error);
+                console.error('Error:', error);
             }
         });
     </script>
@@ -408,11 +421,11 @@
             document.getElementById('modal_on_medication').innerText = on_medication ? 'Yes' : 'No';
             document.getElementById('modal_descriptions').innerText = descriptions.replace(/;/g, '\n');
             document.getElementById('modal_svg_content').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" preserveAspectRatio="none">
-                                                                      <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
-                                                                      <g id="svg_transform" transform="scale(0.1634)">
-                                                                      ${svg_content}
-                                                                      </g>
-                                                                      </svg>`;
+                                                                                  <image id="svg_bg" width="100" height="100" preserveAspectRatio="none" xlink:href="/static/images/human_body_model.jpg" />
+                                                                                  <g id="svg_transform" transform="scale(0.1634)">
+                                                                                  ${svg_content}
+                                                                                  </g>
+                                                                                  </svg>`;
             document.getElementById('modal_priority').innerText = priority;
 
             document.getElementById('patient_modal').style.display = 'block';
@@ -438,7 +451,7 @@
         }
 
         function show_confirmation() {
-        document.getElementById('confirmation_panel').style.display = 'block';
+            document.getElementById('confirmation_panel').style.display = 'block';
         }
 
         function show_svg_zoom() {
@@ -527,6 +540,86 @@
                 event.target.style.display = 'none';
             }
         };
+
+        async function generate_pdf() {
+            const doc = new jspdf.jsPDF({ encoding: 'UTF-8' });
+
+            // Dane tekstowe
+            const details = [
+                `Name: ${document.getElementById('modal_name').innerText}`,
+                `Surname: ${document.getElementById('modal_surname').innerText}`,
+                `Age: ${document.getElementById('modal_age').innerText}`,
+                `Gender: ${document.getElementById('modal_gender').innerText}`,
+                `Blood Type: ${document.getElementById('modal_blood_type').innerText}`,
+                `Allergies: ${document.getElementById('modal_allergies').innerText}`,
+                `Diseases: ${document.getElementById('modal_diseases').innerText}`,
+                `On medication: ${document.getElementById('modal_on_medication').innerText}`,
+                // Rozdzielenie description na linie i dodanie wcięć
+                `Descriptions:\n${document.getElementById('modal_descriptions').innerText
+                    .split(';')
+                    .map(line => `${line.trim()}`)
+                    .join('\n')}`,
+                `Priority: ${document.getElementById('modal_priority').innerText}`,
+            ];
+
+            // Dodanie logo
+            const logoImgData = '/static/images/logo.png';
+            doc.addImage(logoImgData, 'PNG', 160, 10, 40, 40);
+
+            let yPosition = 50; // Startowa pozycja na stronie
+            doc.setFontSize(12);
+            doc.text('Patient Details', 10, yPosition);
+            yPosition += 10;
+
+            details.forEach((detail) => {
+                if (yPosition > 280) { // Gdy zbliżamy się do dolnej krawędzi strony
+                    addFooter(doc); // Dodanie stopki przed utworzeniem nowej strony
+                    doc.addPage();
+                    yPosition = 20; // Reset pozycji na nowej stronie
+                }
+
+                // Dostosowanie odstępu dla descriptions, które mogą być wielolinijkowe
+                const lines = doc.splitTextToSize(detail, 190); // Podział na linie pasujące do szerokości strony
+                lines.forEach((line) => {
+                    doc.text(line, 10, yPosition);
+                    yPosition += 10;
+                    if (yPosition > 280) {
+                        addFooter(doc); // Dodanie stopki przed utworzeniem nowej strony
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                });
+            });
+
+            addFooter(doc); // Dodanie stopki na ostatniej stronie
+
+            const pdfOutput = doc.output('datauristring');
+
+            // Ustawienie modalnego podglądu PDF
+            const modalPreview = document.getElementById('pdf_preview_modal');
+            const embed = document.getElementById('pdf_preview');
+
+            embed.src = pdfOutput;
+
+            // Pokazanie modala z podglądem
+            modalPreview.style.display = 'block';
+        }
+
+        // Funkcja do dodania stopki na stronie
+        function addFooter(doc) {
+            const pageHeight = doc.internal.pageSize.height; // Wysokość strony
+            const margin = 10; // Margines od dolnej krawędzi
+            const yFooterPosition = pageHeight - margin - 10;
+
+            // Rysowanie poziomej linii
+            doc.setLineWidth(0.5);
+            doc.line(120, yFooterPosition, 200, yFooterPosition); // Linie od (x1, y1) do (x2, y2)
+
+            // Dodanie tekstu "Doctor's Signature"
+            doc.setFontSize(10);
+            doc.text("Doctor's Signature", 160, yFooterPosition + 5);
+        }
+
     </script>
 </body>
 </html>

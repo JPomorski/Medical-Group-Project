@@ -605,7 +605,6 @@
 
             details.forEach((detail) => {
                 if (y_position > 280) {
-                    add_footer(doc);
                     doc.addPage();
                     y_position = 20;
                 }
@@ -615,7 +614,6 @@
                     doc.text(line, 10, y_position);
                     y_position += 10;
                     if (y_position > 280) {
-                        add_footer(doc);
                         doc.addPage();
                         y_position = 20;
                     }

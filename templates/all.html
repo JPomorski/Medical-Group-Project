@@ -251,19 +251,6 @@
             }
         }
 
-        function enable_other_field(text_field_id) {
-            const text_field = document.getElementById(text_field_id);
-
-            text_field.style.display = 'block';
-        }
-
-        function disable_other_field(text_field_id) {
-            const text_field = document.getElementById(text_field_id);
-
-            text_field.style.display = 'none';
-            text_field.value = '';
-        }
-
         document.getElementById('edit_form').addEventListener('submit', async function (event) {
             event.preventDefault();
 
@@ -528,24 +515,46 @@
                     document.getElementById('gender').value = patient.gender;
                     document.getElementById('blood_type').value = patient.blood_type;
 
-                    if (patient.allergies.startsWith('Other:')) {
-                        const allergy_details = patient.allergies.split(': ');
+                    if (patient.allergies.startsWith('Other')) {
+                        let allergy_type;
+                        let allergy_description;
+
+                        if (patient.allergies.includes(': ')) {
+                            const allergy_details = patient.allergies.split(': ');
+                            allergy_type = allergy_details[0];
+                            allergy_description = allergy_details[1];
+                        } else {
+                            allergy_type = patient.allergies;
+                            allergy_description = '';
+                        }
+
+                        document.getElementById('allergies').value = allergy_type;
+                        document.getElementById('other_allergy').value = allergy_description;
                         toggle_other_field('allergies', 'other_allergy');
-                        document.getElementById('allergies').value = allergy_details[0];
-                        document.getElementById('other_allergy').value = allergy_details[1];
                     } else {
                         document.getElementById('allergies').value = patient.allergies;
-                        disable_other_field('other_allergy');
+                        toggle_other_field('allergies', 'other_allergy');
                     }
 
-                    if (patient.diseases.startsWith('Other:')) {
-                        const disease_details = patient.diseases.split(': ');
+                    if (patient.diseases.startsWith('Other')) {
+                        let disease_type;
+                        let disease_description;
+
+                        if (patient.diseases.includes(': ')) {
+                            const disease_details = patient.diseases.split(': ');
+                            disease_type = disease_details[0];
+                            disease_description = disease_details[1];
+                        } else {
+                            disease_type = patient.diseases;
+                            disease_description = '';
+                        }
+
+                        document.getElementById('diseases').value = disease_type;
+                        document.getElementById('other_disease').value = disease_description;
                         toggle_other_field('diseases', 'other_disease');
-                        document.getElementById('diseases').value = disease_details[0];
-                        document.getElementById('other_disease').value = disease_details[1];
                     } else {
                         document.getElementById('diseases').value = patient.diseases;
-                        disable_other_field('other_disease');
+                        toggle_other_field('diseases', 'other_disease');
                     }
 
                     document.getElementById('on_medication').checked = patient.on_medication === 'Yes';

@@ -2,6 +2,8 @@ from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
+from priority_algorithm import calculate_priority
+
 app = Flask(__name__, template_folder='templates')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -47,7 +49,9 @@ class PatientRegistration(Resource):
         on_medication = data.get('on_medication', '').lower() == 'yes'
         svg_content = data.get('svg_content')
         descriptions = data.get('descriptions')
-        priority = data.get('priority')
+        priority_enter = data.get('priority')
+        print(priority_enter)
+        priority = calculate_priority(age, diseases, allergies, on_medication, blood_type, descriptions, priority_enter)
 
         if not name or not surname or not age or not gender or not blood_type:
             return jsonify({'message': 'Missing information'}), 400
@@ -131,6 +135,7 @@ class PatientUpdate(Resource):
         if not patient:
             return jsonify({'message': 'Patient not found'}), 404
 
+
         patient.name = data.get('name')
         patient.surname = data.get('surname')
         patient.age = data.get('age')
@@ -171,7 +176,7 @@ def update(patient_id):
 
 @app.route('/all')
 def all():  
-    patients = Patient.query.all()  
+    patients = Patient.query.order_by(Patient.priority.desc()).all()
     return render_template('all.html', patients=patients)
 
 api.add_resource(PatientRegistration, '/register')
@@ -193,7 +198,28 @@ def display_svg_with_bg(patient_id):
         descriptions=patient.descriptions
     )
 
+@app.route('/calculate_priority', methods=['POST'])
+def calculate_priority_endpoint():
+    try:
+        # Pobranie danych z żądania
+        data = request.json
 
+        # Wywołanie gotowej funkcji z argumentami
+        result = calculate_priority(
+            age=int(data['age']),
+            diseases=data['diseases'],
+            allergies=data['allergies'],
+            on_medication=data['on_medication'] == 'Yes',
+            blood_type=data['blood_type'],
+            descriptions=data['descriptions'],
+            priority_enter=int(data['priority_enter'])
+        )
+
+        # Zwrócenie wyniku
+        return jsonify({'priority': result})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

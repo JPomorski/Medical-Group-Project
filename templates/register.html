@@ -5,15 +5,26 @@
     <title>Patient Registration Page</title>
     <link rel="stylesheet" href="../static/css/styles.css">
     <link rel="icon" href="../static/images/logo.png" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h2>Patient Registration Form:</h2>
-    <div class="top_right_buttons">
-        <form action="/all" class="custom_form">
-            <input type="submit" value="ALL PATIENTS">
-        </form>
-    </div>
+    <header class="header_bar">
+        <h2>Patient Registration Form:</h2>
+        <div class="top_right_buttons">
+            <form action="/all" class="custom_form">
+                <button class="header_button">
+                    <i class="fa-solid fa-users fa-xl"></i>
+                </button>
+            </form>
+        </div>
+        <div class="top_left_buttons">
+            <form action="/" class="custom_form">
+                <button class="header_button">
+                    <i class="fa-solid fa-house fa-xl"></i>
+                </button>
+            </form>
+        </div>
+    </header>
     <div class="container">
         <div class="left">
             <form id="register_form">
@@ -360,5 +371,26 @@
 
 
     </script>
+{#    <script>#}
+{#        const form = document.getElementById('register_form');#}
+{#        const priorityDisplay = document.getElementById('priority_display');#}
+{##}
+{#        form.addEventListener('input', () => {#}
+{#            const age = parseInt(form.age.value || 0, 10);#}
+{#            const diseases = form.diseases.value;#}
+{#            const onMedication = form.on_medication.checked;#}
+{#            const bloodType = form.blood_type.value;#}
+{##}
+{#            let priority = 0;#}
+{#            if (diseases !== 'None' || onMedication) priority += 1;#}
+{#            if (age >= 65 || bloodType === 'AB-') priority += 1;#}
+{#            if (['Heart disease', 'Cancer'].includes(diseases)) priority += 1;#}
+{##}
+{#            priority = Math.min(priority, 2);#}
+{#            priorityDisplay.textContent = `Priority: ${priority}`;#}
+{#        });#}
+{#    </script>#}
+
+
 </body>
 </html>

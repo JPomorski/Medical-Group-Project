@@ -96,8 +96,8 @@ def calculate_priority(age, diseases, allergies, on_medication, blood_type, desc
     elif age >= 85:
         priority = max(priority, 2)
 
-    if on_medication:
-        priority = min(priority + 1, 2)
+    # if on_medication:
+    #     priority = min(priority + 1, 2)
 
     if diseases != 'None' or on_medication:
         priority += 1

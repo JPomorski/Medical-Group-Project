@@ -228,7 +228,7 @@ button {
 
 /* register */
 .body_register {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/register_bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/BG2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -311,7 +311,7 @@ button {
 
 .tooltip {
     position: absolute;
-    top: 20%;
+    top: 15%;
     right: 10%;
     background-color: #f44336;
     color: white;
@@ -392,7 +392,7 @@ button {
 
 /* all */
 .body_all {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/database_bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/BG.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -1,0 +1,160 @@
+1. Wprowadzenie pacjenta do bazy
+
+Opis:
+	Ratownik medyczny rejestruje pacjenta w bazie, wpisuj¹c jego dane, takie jak imiê, nazwisko, wiek, p³eæ, grupa krwi itp., co u³atwia dalsze procedury medyczne.
+Stan pocz¹tkowy:
+	Ratownik wprowadza dane przewo¿onego w karetce pacjenta
+Stan koñcowy:
+	Wprowadzany do bazy danych pacjent zostaje dodany na oddzia³
+Aktorzy pierwszoplanowi:
+	Ratownik
+Aktorzy drugoplanowi:
+	System
+Podstawowy przebieg:
+	Ratownik medyczny rejestruje pacjenta w bazie, wpisuj¹c jego dane, takie jak imiê, nazwisko, wiek, p³eæ, grupa krwi itp.
+Alternatywy:
+	Ratownik znajduje pacjenta, który ju¿ kiedyœ odwiedzi³ jednostkê
+Wyj¹tki:
+	Pacjent nieoczekiwanie nie dotar³ na oddzia³.
+
+
+2. Analiza urazów pacjenta przez ratownika
+
+Opis:
+	Ratownik analizuje i ocenia urazy pacjenta, dodaj¹c informacje do formularza pacjenta, aby lekarze mogli siê nimi pos³u¿yæ podczas dalszego leczenia.
+Stan pocz¹tkowy:
+	Ratownik bada pacjenta i wprowadza jego urazy do formularza
+Stan koñcowy:
+	W pe³ni zbadany pacjent zostaje przekazany na oddzia³
+Aktorzy pierwszoplanowi:
+	Ratownik
+Aktorzy drugoplanowi:
+	System
+Podstawowy przebieg:
+	Ratownik analizuje i ocenia urazy pacjenta, dodaj¹c informacje do formularza pacjenta.
+Alternatywy:
+	Podczas badania znaleziono dodatkowe urazy
+Wyj¹tki:
+	Pacjent udawa³
+
+
+3. Zarz¹dzanie histori¹ pobytu pacjenta w jednostce
+
+Opis:
+	System przechowuje pe³n¹ historiê danych pacjentów, umo¿liwiaj¹c szybki dostêp do wczeœniejszych informacji o nich.
+Stan pocz¹tkowy:
+	Ratownik wykorzystuje wczeœniejsze dane pacjenta w celu szybkiego uzupe³nienia formularza
+Stan koñcowy:
+	Lekarz otrzymuje autouzupe³nianie (lub nie).
+Aktorzy pierwszoplanowi:
+	Ratownik
+Aktorzy drugoplanowi:
+	System
+Podstawowy przebieg:
+	Ratownik wybiera dostêpnego pacjenta w systemie
+Alternatywy:
+	System nie ma historii danych, pacjenta przyjmuje siê jako nowego.
+Wyj¹tki:
+	Brak dostêpu do historii danych pacjenta z powodu awarii systemu.
+
+
+4. Œledzenie statusu leczenia pacjenta 
+
+Opis:
+	Ratownicy i personel medyczny mog¹ œledziæ aktualny stan leczenia pacjenta.
+Stan pocz¹tkowy:
+	Pacjent zosta³ przyjêty na oddzia³, a jego stan zdrowia jest monitorowany.
+Stan koñcowy:
+	Ratownicy i lekarze maj¹ dostêp do aktualnych informacji o leczeniu pacjenta.
+Aktorzy pierwszoplanowi:
+	Lekarz, ratownik
+Aktorzy drugoplanowi:
+	System
+Podstawowy przebieg:
+	Personel medyczny œledzi aktualne informacje o leczeniu pacjenta, wpisuj¹c wyniki badañ i diagnozy.
+Alternatywy:
+	Pacjent zostaje wypisany tego samego dnia.
+Wyj¹tki:
+	Problemy z aktualizacj¹ danych pacjenta w systemie.
+
+
+5. Eksport danych pacjenta
+
+Opis:
+	Ratownicy mog¹ eksportowaæ dane pacjentów (w formie PDF lub pliku tekstowego).
+Stan pocz¹tkowy:
+	Utworzenie dokumentów w odpowiedni formacie.	
+Stan koñcowy:
+	Ratownik eksportuje dane pacjenta.
+Aktorzy pierwszoplanowi:
+	Ratownik, personel szpitala.
+Aktorzy drugoplanowi:
+	System, baza danych pacjentów.
+Podstawowy przebieg:
+	Ratownik generuje raport medyczny pacjenta w formacie PDF i przekazuje go lekarzom w szpitalu.
+Alternatywy:
+	Dane pacjenta przekazywane s¹ manualnie bez u¿ycia systemu.
+Wyj¹tki:
+	B³¹d podczas generowania pliku PDF, system nie potrafi wygenerowaæ pe³nego raportu.
+
+
+6. Zarz¹dzanie dostêpem do danych pacjentów
+
+Opis:
+	Uprawnienia dostêpu mog¹ byæ przydzielane ró¿nym u¿ytkownikom, np. ratownikom, lekarzom czy administratorom, co chroni dane pacjentów przed nieautoryzowanym dostêpem.
+Stan pocz¹tkowy:
+	Ró¿ni pracownicy s³u¿by zdrowia maj¹ potrzebê dostêpu do ró¿nych danych o pacjentach.
+Stan koñcowy:
+	U¿ytkownicy maj¹ przydzielone odpowiednie uprawnienia, które ograniczaj¹ dostêp do okreœlonych danych.
+Aktorzy pierwszoplanowi:
+	Administrator systemu, ratownicy, lekarze
+Aktorzy drugoplanowi:
+	System autoryzacji, baza danych pacjentów.
+Podstawowy przebieg:
+	Administrator zarz¹dza uprawnieniami u¿ytkowników systemu, definiuj¹c ich poziomy dostêpu.
+Alternatywy:
+	Ka¿dy u¿ytkownik ma pe³ny dostêp do wszystkich danych, co mo¿e stwarzaæ ryzyko naruszenia prywatnoœci.
+Wyj¹tki:
+	B³êdne nadanie uprawnieñ, co prowadzi do nieautoryzowanego dostêpu do danych.
+
+
+7. Kontrola nad wypisem pacjentów
+
+Opis:
+	System pozwala lekarzom i ratownikom kontrolowaæ proces wypisu pacjenta.
+Stan pocz¹tkowy:
+	Pacjent zakoñczy³ leczenie i ma zostaæ wypisany z jednostki.
+Stan koñcowy:
+	Wypis pacjenta jest prawid³owo zarejestrowany.
+Aktorzy pierwszoplanowi:
+	Lekarz
+Aktorzy drugoplanowi:
+	System, baza danych pacjentów.
+Podstawowy przebieg:
+	Lekarz lub ratownik potwierdza zakoñczenie leczenia pacjenta
+Alternatywy:
+	Pacjent zostaje skierowany na dalsze leczenie.
+Wyj¹tki:
+	Pacjent zosta³ wypisany na w³asne ¿¹danie
+
+
+8. Kategoryzacja nag³oœci przyjêcia pacjenta
+
+Opis:
+	System wspiera ratowników i lekarzy w klasyfikacji pacjentów pod wzglêdem pilnoœci ich przyjêcia, np. na podstawie urazy, stan zdrowia i inne czynniki.
+Stan pocz¹tkowy:
+	Pacjent zostaje przywieziony na oddzia³ ratunkowy, a jego stan zdrowia wymaga natychmiastowej oceny.
+Stan koñcowy:
+	Pacjent zostaje sklasyfikowany w zale¿noœci od nag³oœci jego przypadku, co pozwala na priorytetyzacjê leczenia.
+Aktorzy pierwszoplanowi:
+	System.
+Aktorzy drugoplanowi:
+	Ratownik, lekarz
+Podstawowy przebieg:
+	System ocenia stan pacjenta na podstawie badania ratownika, wybieraj¹c 	odpowiedni¹ kategoriê priorytetow¹.
+Alternatywy:
+	Priorytetyzacja pacjentów na podstawie subiektywnych ocen ratowników bez wsparcia systemu.
+Wyj¹tki:
+	Niew³aœciwa ocena priorytetów skutkuj¹ca b³êdn¹ klasyfikacj¹.
+
+*nerd emoji^*

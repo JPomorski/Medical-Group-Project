@@ -36,7 +36,6 @@ def extract_injury_priority(descriptions):
         if not part:
             continue
 
-        # Extract the body part and description
         body_part_desc = part.split(';Description:')
         if len(body_part_desc) < 2:
             continue
@@ -61,16 +60,15 @@ def count_body_parts(descriptions):
     return len([part for part in body_parts if part.strip()])
 def calculate_priority(age, diseases, allergies, on_medication, blood_type, descriptions, priority_enter):
     priority = 0
-    # Set priority based on body parts count if option 3 is selected
     priority_enter = int(priority_enter)
     print(f"priority_enter: {priority_enter}")
     if priority_enter == 3:
-        if descriptions.strip():  # Check if descriptions is not empty
+        if descriptions.strip():  
             print("priority_enter is 3")
             priority = extract_injury_priority(descriptions)
         else:
             print("priority_enter is 3 but no description provided")
-            priority = 0  # Set priority to 0 or handle as needed
+            priority = 0  
     elif priority_enter == 2:
         print("priority_enter is 2")
         body_parts_count = count_body_parts(descriptions)
@@ -83,30 +81,24 @@ def calculate_priority(age, diseases, allergies, on_medication, blood_type, desc
             priority = 0
     else:
         print("priority_enter is not 2 or 3")
-    # Convert age to integer
     age = int(age)
 
-    # Reguły związane z chorobami
     high_risk_diseases = ["Heart disease", "Diabetes", "Epilepsy", "Cancer"]
     if any(disease in high_risk_diseases for disease in diseases):
         priority = max(priority, 2)
 
-    # Reguły związane z alergiami
     high_risk_allergies = ["Peanut allergy", "Insect sting allergy"]
     if any(allergy in high_risk_allergies for allergy in allergies):
         priority = max(priority, 1)
 
-    # Reguły związane z wiekiem
     if age >= 70:
         priority = max(priority, 1)
     elif age >= 85:
         priority = max(priority, 2)
 
-    # Pacjent na lekach - podnosi priorytet o jeden poziom
     if on_medication:
         priority = min(priority + 1, 2)
 
-    # Dodatkowe reguły z JavaScript
     if diseases != 'None' or on_medication:
         priority += 1
     if age >= 65 or blood_type == 'AB-':
@@ -114,7 +106,6 @@ def calculate_priority(age, diseases, allergies, on_medication, blood_type, desc
     if 'Heart disease' in diseases or 'Cancer' in diseases:
         priority += 1
 
-    # Ograniczenie priorytetu do maksymalnie 2
     priority = min(priority, 2)
 
     return priority

@@ -227,12 +227,18 @@ button {
  
 
 /* register */
+.body_register {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/register_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 .container {
     display: flex;
-    justify-content: center;  
-    align-items: center;  
-    flex-direction: row;  
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
     height: 90vh;
     padding: 20px;
     box-sizing: border-box;
@@ -385,6 +391,12 @@ button {
 
 
 /* all */
+.body_all {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/database_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .edit_button {
     background-color: #2194d7;
 }
@@ -492,8 +504,7 @@ button {
 
 
 .header_bar {
-    background-color: #575555;
-    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
     height: 10%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -503,7 +514,7 @@ button {
 }
 
 .header_bar h2 {
-    color: #ffffff; /* Text color */
+    color: #ffffff; 
     margin: 0;
 }
 
@@ -519,7 +530,7 @@ button {
 .top_left_buttons {
     position: absolute;
     top: 50%;
-    left: 15px; /* Zamiast 'right', używamy 'left' */
+    left: 15px; 
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -575,7 +586,7 @@ button {
 }
 
 .priority-0 {
-    background-color: #188c18; /* Tło dla priorytetu 0 */
+    background-color: #188c18; 
     color: white;
 }
 .priority-0:hover {
@@ -583,7 +594,7 @@ button {
 }
 
 .priority-1 {
-    background-color: #ffb400; /* Tło dla priorytetu 1 */
+    background-color: #ffb400; 
     color: black;
 }
 .priority-1:hover {
@@ -591,7 +602,7 @@ button {
 }
 
 .priority-2 {
-    background-color: #ff0000; /* Tło dla priorytetu 2 */
+    background-color: #ff0000; 
     color: white;
 }
 .priority-2:hover {
@@ -606,16 +617,16 @@ button {
 }
 .button-content i {
     position: absolute;
-    left: 10px; /* Możesz dostosować wartość */
+    left: 10px; 
 }
 .body_button_main_register, .body_button_main_database {
-    width: 100px; /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
+    width: 100px; 
+    height: 100px; 
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto; /* Center the buttons horizontally */
+    margin: 0 auto; 
 }
 .icon-text {
-    font-size: 10px; /* Zmień na odpowiedni rozmiar, np. 8px */
+    font-size: 10px; 
 }

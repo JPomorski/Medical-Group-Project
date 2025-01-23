@@ -7,7 +7,7 @@
     <link rel="icon" href="../static/images/logo.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body class="body_all">
 <header class="header_bar">
     <h2>All Patient Forms:</h2>
     <div class="top_right_buttons">
@@ -28,7 +28,7 @@
     <ul>
         {% for patient in patients %}
         <li>
-            <button class="priority-{{ patient.priority }}" onclick="show_modal('{{ patient.id }}', '{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}', '{{ patient.descriptions }}', '{{ patient.svg_content }}', '{{ patient.priority }}' )">
+            <button class="priority-{{ patient.priority }}" onclick="show_modal('{{ patient.id }}', '{{ patient.name }}', '{{ patient.surname }}', '{{ patient.age }}', '{{ patient.gender }}', '{{ patient.blood_type }}', '{{ patient.allergies }}', '{{ patient.diseases }}', '{{ patient.on_medication }}', '{{ patient.descriptions }}', '{{ patient.svg_content }}', '{{ patient.priority }}')">
                 <span class="button-content">
                     <i class="fa-solid fa-hospital-user"></i>
                     {{ patient.name }} {{ patient.surname }}
@@ -264,7 +264,6 @@
                 text_field.value = '';
             }
         }
-        // Funkcja do wywołania backendowego API
         async function fetchPriority(patientData) {
             const response = await fetch('/calculate_priority', {
                 method: 'POST',
@@ -301,7 +300,6 @@
 
             const descriptions = Object.entries(body_part_data)
                 .map(([body_part, data]) => `;» ${body_part.charAt(0).toUpperCase() + body_part.slice(1).replaceAll('_', ' ')};Description: ${data.description};Comment: ${data.comment};`).join('');
-            // Dane pacjenta
             const patientData = {
                 age,
                 diseases: final_disease,
@@ -309,26 +307,23 @@
                 on_medication,
                 blood_type,
                 descriptions,
-                priority_enter: 0  // Jeśli ma być przesyłane początkowe priority
+                priority_enter: 0  
             };
 
             try {
-                // Wywołanie API do obliczenia priorytetu
                 const priority = await fetchPriority(patientData);
 
                 console.log('Calculated Priority:', priority);
 
-                // Zbudowanie ostatecznego obiektu
                 const form_data = {
                     ...patientData,
                     name,
                     surname,
                     gender,
-                    svg_content: null, // Jeśli potrzebujesz SVG, zostaw to tak jak było
+                    svg_content: null, 
                     priority
                 };
 
-                // Wysyłanie danych do swojego istniejącego backendu
                 const response = await fetch(`/update/${selected_patient}`, {
                     method: 'PUT',
                     headers: {
@@ -420,7 +415,6 @@
         let selected_patient = null;
 
         function show_modal(id, name, surname, age, gender, blood_type, allergies, diseases, on_medication, descriptions, svg_content, priority) {
-            console.log(id);
             selected_patient = id;
 
             document.getElementById('modal_name').innerText = name;
